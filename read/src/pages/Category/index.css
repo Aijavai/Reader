@@ -1,0 +1,257 @@
+.category-page {
+  background: #f5f5f5;
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+/* 顶部导航 */
+.top-navigation {
+  background: #fff;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+
+.nav-items {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-item {
+  font-size: 15px;
+  color: #666;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s;
+  padding: 4px 0;
+}
+
+.nav-item.active {
+  color: #333;
+  font-weight: 600;
+}
+
+.search-icon {
+  font-size: 18px;
+  color: #666;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+  padding: 4px;
+}
+
+.search-icon:hover {
+  opacity: 0.7;
+}
+
+.search-icon:active {
+  transform: scale(0.9);
+}
+
+/* 分类标签 */
+.category-tabs {
+  background: #fff;
+  padding: 16px 20px 0;
+  display: flex;
+  gap: 32px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.category-tab {
+  font-size: 16px;
+  color: #666;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 0 16px;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.category-tab.active {
+  color: #ff6b35;
+  font-weight: 600;
+}
+
+.category-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #ff6b35;
+  border-radius: 2px;
+}
+
+/* 内容区域 */
+.category-content {
+  background: #fff;
+  padding: 20px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* 热门分类网格 */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.category-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: #fafafa;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.category-card:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+.category-card:active {
+  transform: scale(0.98);
+}
+
+.category-cover {
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.category-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* 情节分类标签网格 */
+.plot-tags-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.plot-tag {
+  padding: 12px 16px;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.plot-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.plot-tag:active {
+  transform: scale(0.95);
+}
+
+/* 响应式设计 */
+@media (max-width: 375px) {
+  .nav-items {
+    gap: 16px;
+  }
+  
+  .nav-item {
+    font-size: 14px;
+  }
+  
+  .category-tabs {
+    gap: 24px;
+  }
+  
+  .categories-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .category-card {
+    padding: 10px;
+    gap: 10px;
+  }
+  
+  .plot-tags-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .plot-tag {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 414px) {
+  .categories-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hot-categories-section,
+.plot-categories-section {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* 滚动优化 */
+.category-content {
+  scroll-behavior: smooth;
+}
+
+/* 触摸反馈 */
+.category-card,
+.plot-tag {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+/* 加载状态 */
+.category-card:empty::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 8px;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

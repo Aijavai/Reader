@@ -1,0 +1,54 @@
+.theme-switch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  gap: 12px;
+}
+
+.theme-switch-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.theme-icon {
+  font-size: 18px;
+}
+
+.theme-text {
+  font-size: 14px;
+  color: var(--text-color, #333);
+  font-weight: 500;
+}
+
+/* 主题变量 */
+:root {
+  --bg-color: #fff;
+  --text-color: #333;
+  --border-color: #eee;
+  --card-bg: #fff;
+  --secondary-text: #666;
+  --tertiary-text: #999;
+}
+
+[data-theme="dark"] {
+  --bg-color: #1a1a1a;
+  --text-color: #fff;
+  --border-color: #333;
+  --card-bg: #2a2a2a;
+  --secondary-text: #ccc;
+  --tertiary-text: #999;
+}
+
+/* 全局主题样式 */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.theme-switch:hover .theme-text {
+  color: #1989fa;
+}

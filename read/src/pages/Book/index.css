@@ -1,0 +1,134 @@
+.book-page {
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+.book-header {
+  background: #fff;
+  padding: 20px;
+  display: flex;
+  gap: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.book-cover {
+  flex-shrink: 0;
+}
+
+.book-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.book-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+}
+
+.book-author {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.book-tags {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.book-stats {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.score {
+  font-size: 14px;
+  color: #ff6b35;
+  font-weight: 500;
+}
+
+.status {
+  font-size: 14px;
+  color: #52c41a;
+  font-weight: 500;
+}
+
+.book-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: #999;
+}
+
+.book-description {
+  background: #fff;
+  margin-top: 8px;
+  padding: 20px;
+}
+
+.book-description h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 12px 0;
+}
+
+.book-description p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #666;
+  margin: 0;
+}
+
+.chapter-info {
+  background: #fff;
+  margin-top: 8px;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.latest-chapter {
+  font-size: 14px;
+  color: #333;
+}
+
+.chapter-title {
+  color: #ff6b35;
+  font-weight: 500;
+}
+
+.update-time {
+  font-size: 12px;
+  color: #999;
+}
+
+.action-buttons {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  padding: 12px 20px;
+  display: flex;
+  gap: 12px;
+  border-top: 1px solid #eee;
+  z-index: 100;
+}
+
+.add-shelf-btn {
+  flex: 1;
+  border: 1px solid #ff6b35;
+  color: #ff6b35;
+}
+
+.read-btn {
+  flex: 2;
+}

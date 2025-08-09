@@ -1,0 +1,120 @@
+/* 全局主题变量 */
+:root {
+  --primary-color: #ff6b35;
+  --bg-color: #f5f5f5;
+  --card-bg: #fff;
+  --text-color: #333;
+  --secondary-text: #666;
+  --tertiary-text: #999;
+  --border-color: #eee;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --navbar-bg: #fff;
+  --tabbar-bg: #fff;
+}
+
+/* 暗色主题 */
+[data-theme="dark"] {
+  --bg-color: #1a1a1a;
+  --card-bg: #2a2a2a;
+  --text-color: #fff;
+  --secondary-text: #ccc;
+  --tertiary-text: #999;
+  --border-color: #333;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --navbar-bg: #2a2a2a;
+  --tabbar-bg: #2a2a2a;
+}
+
+/* 全局样式 */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* React Vant 组件主题适配 */
+[data-theme="dark"] .rv-nav-bar {
+  background: var(--navbar-bg) !important;
+  color: var(--text-color) !important;
+}
+
+[data-theme="dark"] .rv-nav-bar__title {
+  color: var(--text-color) !important;
+}
+
+[data-theme="dark"] .rv-nav-bar__left,
+[data-theme="dark"] .rv-nav-bar__right {
+  color: var(--text-color) !important;
+}
+
+[data-theme="dark"] .rv-tabbar {
+  background: var(--tabbar-bg) !important;
+  border-top-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .rv-tabbar-item {
+  color: var(--secondary-text) !important;
+}
+
+[data-theme="dark"] .rv-tabbar-item--active {
+  color: var(--primary-color) !important;
+}
+
+[data-theme="dark"] .rv-popup {
+  background: var(--card-bg) !important;
+}
+
+[data-theme="dark"] .rv-action-sheet {
+  background: var(--card-bg) !important;
+}
+
+[data-theme="dark"] .rv-toast {
+  background: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-text);
+}
+
+/* 响应式字体大小 */
+.font-size-14 {
+  font-size: 14px !important;
+}
+
+.font-size-16 {
+  font-size: 16px !important;
+}
+
+.font-size-18 {
+  font-size: 18px !important;
+}
+
+.font-size-20 {
+  font-size: 20px !important;
+}

@@ -1,0 +1,256 @@
+.profile-page {
+  background: #f5f5f5;
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+/* 顶部导航 */
+.profile-header {
+  background: #fff;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+
+.header-left,
+.header-center,
+.header-right {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.header-icon {
+  font-size: 18px;
+  color: #333;
+}
+
+/* 用户信息区域 */
+.user-info-section {
+  background: #fff;
+  padding: 30px 20px 20px;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.user-avatar {
+  margin-bottom: 12px;
+}
+
+.avatar-image {
+  border: 2px solid #f0f0f0;
+}
+
+.user-nickname {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* 资产统计 */
+.assets-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  position: relative;
+}
+
+.asset-item {
+  text-align: center;
+}
+
+.asset-number {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.asset-label {
+  font-size: 12px;
+  color: #666;
+}
+
+.recharge-btn {
+  position: absolute;
+  right: 0;
+  padding: 6px 16px;
+  font-size: 12px;
+}
+
+/* VIP区域 */
+.vip-section {
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  margin: 8px 20px;
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  cursor: pointer;
+}
+
+.vip-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.vip-label {
+  background: linear-gradient(45deg, #f39c12, #e67e22);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.vip-desc {
+  font-size: 14px;
+}
+
+.vip-arrow {
+  font-size: 18px;
+  color: #bdc3c7;
+}
+
+/* 功能菜单 */
+.function-menu-section {
+  background: #fff;
+  margin: 8px 20px;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.menu-item:active {
+  transform: scale(0.95);
+}
+
+.menu-icon-wrapper {
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.menu-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #fff;
+}
+
+.menu-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  background: #ff4444;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+.menu-name {
+  font-size: 12px;
+  color: #333;
+  text-align: center;
+}
+
+/* 个人功能列表 */
+.personal-menu-section {
+  background: #fff;
+  margin: 8px 20px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.personal-menu-item {
+  padding: 16px 20px;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.personal-menu-item:last-child {
+  border-bottom: none;
+}
+
+.cell-icon {
+  font-size: 18px;
+  margin-right: 12px;
+  width: 20px;
+  text-align: center;
+}
+
+/* 充值弹窗 */
+.recharge-popup {
+  padding: 30px 20px 20px;
+  text-align: center;
+}
+
+.popup-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.popup-content {
+  margin-bottom: 30px;
+}
+
+.popup-content p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+/* 响应式设计 */
+@media (max-width: 375px) {
+  .assets-stats {
+    gap: 20px;
+  }
+  
+  .menu-grid {
+    gap: 15px;
+  }
+  
+  .menu-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+}
+
+/* react-vant组件样式覆盖 */
+.rv-cell {
+  padding: 16px 20px;
+}
+
+.rv-cell__title {
+  font-size: 15px;
+  color: #333;
+}
+
+.rv-cell__right-icon {
+  color: #c8c9cc;
+}

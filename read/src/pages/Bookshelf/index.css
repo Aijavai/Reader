@@ -1,0 +1,271 @@
+.bookshelf-page {
+  background: var(--bg-color, #f5f5f5);
+  min-height: 100vh;
+  padding-bottom: 60px;
+  transition: background-color 0.3s ease;
+}
+
+/* 顶部导航 */
+.bookshelf-header {
+  background: #fff;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.header-left:hover {
+  opacity: 0.7;
+}
+
+.header-left:active {
+  transform: scale(0.95);
+}
+
+.header-center,
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+
+.search-text,
+.history-text,
+.more-text {
+  font-size: 12px;
+}
+
+.header-icon {
+  font-size: 16px;
+  margin-right: 2px;
+}
+
+/* 阅读时长统计 */
+.reading-stats {
+  background: #fff;
+  padding: 30px 20px;
+  text-align: center;
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.stats-number {
+  font-size: 48px;
+  font-weight: 300;
+  color: #333;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stats-text {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.sign-in-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 6px 16px;
+  font-size: 12px;
+}
+
+/* 书架内容 */
+.bookshelf-content {
+  background: var(--card-bg, #fff);
+  padding: 20px;
+  min-height: calc(100vh - 200px);
+}
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 0;
+}
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.book-card:hover {
+  transform: translateY(-2px);
+}
+
+.book-card:active {
+  transform: scale(0.95);
+}
+
+.book-cover-container {
+  position: relative;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-color, transparent);
+}
+
+.book-cover {
+  display: block;
+}
+
+.book-info {
+  text-align: center;
+  width: 100%;
+}
+
+.book-title {
+  font-size: 13px;
+  color: var(--text-primary, #333);
+  font-weight: 500;
+  margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100px;
+  line-height: 1.4;
+}
+
+.book-progress {
+  font-size: 11px;
+  color: var(--text-tertiary, #999);
+}
+
+.progress-text {
+  background: #f0f0f0;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 10px;
+}
+
+/* 添加书籍卡片 */
+.add-book-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 160px;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.add-book-card:hover {
+  border-color: #ff6b35;
+}
+
+.add-book-icon {
+  margin-bottom: 8px;
+}
+
+.plus-icon {
+  font-size: 40px;
+  color: #ccc;
+  font-weight: 300;
+}
+
+/* 空书架状态 */
+.empty-bookshelf {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.empty-icon {
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.bookmark-icon {
+  font-size: 60px;
+}
+
+.empty-text {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.empty-desc {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 30px;
+}
+
+.go-bookstore-btn {
+  width: 200px;
+}
+
+/* 暗色主题适配 */
+[data-theme="dark"] .bookshelf-page {
+  background: var(--bg-color);
+}
+
+[data-theme="dark"] .bookshelf-content {
+  background: var(--card-bg);
+}
+
+[data-theme="dark"] .book-cover-container {
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .book-card:hover .book-cover-container {
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
+}
+
+/* 响应式设计 */
+@media (max-width: 375px) {
+  .books-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .book-card {
+    margin: 0 auto;
+  }
+  
+  .book-cover-container {
+    width: 100px;
+  }
+  
+  .book-title {
+    max-width: 80px;
+    font-size: 12px;
+  }
+  
+  .add-book-card {
+    width: 100px;
+    height: 133px;
+  }
+}
+
+@media (min-width: 414px) {
+  .books-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

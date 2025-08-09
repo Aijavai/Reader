@@ -1,0 +1,138 @@
+.search-history {
+  min-height: 100vh;
+  background: var(--bg-color, #f5f5f5);
+  transition: background-color 0.3s ease;
+}
+
+.search-history-content {
+  padding: 16px;
+}
+
+.history-stats {
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: var(--text-secondary, #666);
+  padding: 0 4px;
+}
+
+.history-list {
+  background: var(--card-bg, white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border-color, transparent);
+}
+
+.history-item {
+  border-bottom: 1px solid var(--border-light, #f0f0f0);
+  transition: background-color 0.2s ease;
+}
+
+.history-item:last-child {
+  border-bottom: none;
+}
+
+.history-item:hover {
+  background: var(--bg-hover, #f8f9fa);
+}
+
+.history-item:active {
+  background: var(--bg-active, #f0f0f0);
+}
+
+.history-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.empty-history {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: 40px 20px;
+}
+
+/* 自定义 Cell 样式 */
+.history-item .rv-cell {
+  padding: 16px;
+  background: transparent;
+}
+
+.history-item .rv-cell__title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary, #333);
+  margin-bottom: 4px;
+}
+
+.history-item .rv-cell__label {
+  font-size: 12px;
+  color: var(--text-tertiary, #999);
+  margin-top: 4px;
+}
+
+.history-item .rv-cell__right-icon {
+  color: var(--primary-color, #ff6b35);
+  font-size: 16px;
+}
+
+/* 暗色主题适配 */
+[data-theme="dark"] .search-history {
+  background: var(--bg-color);
+}
+
+[data-theme="dark"] .history-list {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+  box-shadow: 0 2px 12px rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .history-item {
+  border-bottom-color: var(--border-light);
+}
+
+[data-theme="dark"] .history-item:hover {
+  background: var(--bg-hover);
+}
+
+[data-theme="dark"] .history-item:active {
+  background: var(--bg-active);
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+  .search-history-content {
+    padding: 12px;
+  }
+  
+  .history-item .rv-cell {
+    padding: 14px;
+  }
+  
+  .history-item .rv-cell__title {
+    font-size: 14px;
+  }
+  
+  .history-item .rv-cell__label {
+    font-size: 11px;
+  }
+}
+
+/* 动画效果 */
+.history-item {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

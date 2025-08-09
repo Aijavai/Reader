@@ -1,0 +1,154 @@
+.reading-history-page {
+  background: var(--bg-color);
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+.history-content {
+  padding: 16px;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.history-item {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.history-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.history-item:active {
+  transform: translateY(0);
+}
+
+.book-cover {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.shelf-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #ff6b35;
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 8px;
+  transform: scale(0.8);
+}
+
+.book-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.book-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0 0 8px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.book-meta {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.book-author,
+.book-category {
+  font-size: 12px;
+  color: var(--secondary-text);
+  background: var(--bg-color);
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+.reading-progress {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress-text {
+  font-size: 12px;
+  color: var(--tertiary-text);
+}
+
+.read-time {
+  font-size: 11px;
+  color: var(--tertiary-text);
+}
+
+.action-btn {
+  flex-shrink: 0;
+}
+
+.empty-state {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.empty-btn {
+  margin-top: 16px;
+}
+
+/* 主题适配 */
+[data-theme="dark"] .history-item {
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+}
+
+[data-theme="dark"] .book-title {
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .book-author,
+[data-theme="dark"] .book-category {
+  background: var(--bg-color);
+  color: var(--secondary-text);
+}
+
+[data-theme="dark"] .progress-text,
+[data-theme="dark"] .read-time {
+  color: var(--tertiary-text);
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+  .history-content {
+    padding: 12px;
+  }
+  
+  .history-item {
+    padding: 12px;
+    gap: 10px;
+  }
+  
+  .book-title {
+    font-size: 15px;
+  }
+  
+  .action-btn .rv-button {
+    font-size: 12px;
+    padding: 4px 12px;
+  }
+}

@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
-import { Grid, Tag, Image, Badge } from 'react-vant';
-import { useNavigate } from 'react-router-dom';
-import SearchBox from '../../components/SearchBox';
+import { 
+  Grid, 
+  Tag, 
+  Image, 
+  Badge 
+} from 'react-vant';
+import { 
+  useNavigate 
+} from 'react-router-dom';
+import SearchBox from '@/components/SearchBox';
 import './index.css';
 
 const Home = () => {

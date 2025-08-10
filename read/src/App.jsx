@@ -43,11 +43,12 @@ function App() {
             <Route path='/' element={<Navigate to='/home' />} />
             <Route path='/home' element={<Home />} />
             <Route path='/category' element={<Category />} />
-            <Route path='/bookshelf' element={<Bookshelf />} />
             <Route path='/profile' element={<Profile />} />
-            <Route path='/search' element={<Search />} />
+            <Route path='/bookshelf' element={<Bookshelf />} />
+            
           </Route>
           <Route element={<BlankLayout />}>
+            <Route path='/search' element={<Search />} />
             <Route path='/book/:id' element={<Book />} />
             <Route path='/settings' element={<Settings />} />
             <Route path='/reading-history' element={<ReadingHistory />} />

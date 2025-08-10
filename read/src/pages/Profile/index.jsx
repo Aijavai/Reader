@@ -1,25 +1,50 @@
-import React, { useState } from 'react';
-import { Button, Image, Grid, Cell, Badge, Popup } from 'react-vant';
-import { useNavigate } from 'react-router-dom';
-import { useAppStore } from '../../store/useAppStore';
-import ThemeSwitch from '../../components/ThemeSwitch';
 import './index.css';
+import React, { useState } from 'react';
+import { 
+  Button,
+   Image, 
+   Grid, 
+   Cell, 
+   Badge, 
+   Popup,
+   ActionSheet
+  } from 'react-vant';
+import useTitle from '@/hooks/useTitle';
+import { useNavigate } from 'react-router-dom';
+import { useAppStore } from '@/store/useAppStore';
+import ThemeSwitch from '@/components/ThemeSwitch';
+// import {
+//   generateAvatar
+// } from '@llm'
 
 const Profile = () => {
   const navigate = useNavigate();
   const { readingHistory, bookshelfBooks } = useAppStore();
   const [showRechargePopup, setShowRechargePopup] = useState(false);
-  
+  const [showActionSheet, setShowActionSheet] = useState(false);
   // 用户信息
-  const userInfo = {
-    avatar: '/api/placeholder/60/60',
-    nickname: '玖',
-    coins: 0,
+  const [userInfo,setUserInfo] = useState({
+    avatar: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e',
+    nickname: 'admin',
+    coins: 99,
     beans: 0,
     coupons: 0,
     isVip: false
-  };
+  });
+  useTitle('我的')
   
+  const actions = [
+     {
+            name: 'AI生成头像',
+            color: '#123123',
+            type: 1
+        },
+        {
+            name: '上传头像',
+            color: '#ee0a24',
+            type: 2
+        }
+  ]
   // 功能菜单
   const functionMenus = [
     {
@@ -100,21 +125,24 @@ const Profile = () => {
   const handleRecharge = () => {
     setShowRechargePopup(true);
   };
+  const handleAction = async (e) => {
+    console.log(e)
+    if (e.type === 1) {
+      // AI 生成头像
+      const text = `
+        昵称：${userInfo.nickname}
+      `;
+      const newAvatar = await generateAvatar(text);
+
+    } else if (e.type === 2) {
+      // 图片上传
+    }
+  }
+
+  
   
   return (
     <div className="profile-page">
-      {/* 顶部导航 */}
-      <div className="profile-header">
-        <div className="header-left">
-          <span className="header-icon">🔄</span>
-        </div>
-        <div className="header-center">
-          <span className="header-icon">🕐</span>
-        </div>
-        <div className="header-right" onClick={() => navigate('/settings')}>
-          <span className="header-icon">⚙️</span>
-        </div>
-      </div>
       
       {/* 用户信息区域 */}
       <div className="user-info-section">
@@ -126,6 +154,7 @@ const Profile = () => {
             fit="cover"
             round
             className="avatar-image"
+            onClick={() => setShowActionSheet(true)}
           />
         </div>
         <div className="user-nickname">{userInfo.nickname}</div>
@@ -223,6 +252,14 @@ const Profile = () => {
           </Button>
         </div>
       </Popup>
+      {/* 更新头像弹窗 */}
+      <ActionSheet
+        visible={showActionSheet}
+        actions={actions}
+        cancelText='取消'
+        onCancel={() => setShowActionSheet(false)}
+        onSelect={(e) => handleAction(e)}
+      />
     </div>
   );
 };

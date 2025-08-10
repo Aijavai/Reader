@@ -1,8 +1,13 @@
 import React from 'react';
-import { NavBar, Cell, Slider, ActionSheet, Toast } from 'react-vant';
+import { 
+  NavBar,
+   Cell, 
+   Slider, 
+   ActionSheet, 
+   Toast } from 'react-vant';
 import { useNavigate } from 'react-router-dom';
-import { useAppStore } from '../../store/useAppStore';
-import ThemeSwitch from '../../components/ThemeSwitch';
+import { useAppStore } from '@/store/useAppStore';
+import ThemeSwitch from '@/components/ThemeSwitch';
 import './index.css';
 
 const Settings = () => {

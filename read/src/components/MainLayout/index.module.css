@@ -1,0 +1,126 @@
+.main-layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 50px;
+}
+
+/* 导航栏样式优化 */
+.rv-tabbar {
+  background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+  border-top: 1px solid #e8e8e8;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.rv-tabbar-item {
+  color: #7d7e80;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.rv-tabbar-item--active {
+  color: #ff6b35;
+  transform: translateY(-1px);
+}
+
+.rv-tabbar-item--active::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 3px;
+  background: linear-gradient(90deg, #ff6b35, #ff8a50);
+  border-radius: 2px;
+  animation: tabIndicator 0.3s ease;
+}
+
+.rv-tabbar-item__icon {
+  font-size: 22px;
+  margin-bottom: 2px;
+  transition: all 0.3s ease;
+}
+
+.rv-tabbar-item--active .rv-tabbar-item__icon {
+  transform: scale(1.1);
+  filter: drop-shadow(0 2px 4px rgba(255, 107, 53, 0.3));
+}
+
+.rv-tabbar-item__text {
+  font-size: 11px;
+  font-weight: 500;
+  margin-top: 2px;
+  transition: all 0.3s ease;
+}
+
+.rv-tabbar-item--active .rv-tabbar-item__text {
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(255, 107, 53, 0.2);
+}
+
+/* 徽章样式优化 */
+.rv-tabbar-item .rv-badge {
+  background: linear-gradient(135deg, #ff4757, #ff3742);
+  color: white;
+  font-size: 9px;
+  font-weight: 600;
+  padding: 1px 4px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(255, 71, 87, 0.3);
+  animation: badgePulse 2s infinite;
+}
+
+/* 动画效果 */
+@keyframes tabIndicator {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  100% {
+    width: 20px;
+    opacity: 1;
+  }
+}
+
+@keyframes badgePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* 暗色主题适配 */
+[data-theme="dark"] .rv-tabbar {
+  background: linear-gradient(180deg, #1f1f1f 0%, #2a2a2a 100%);
+  border-top-color: #333;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .rv-tabbar-item {
+  color: #8a8a8a;
+}
+
+[data-theme="dark"] .rv-tabbar-item--active {
+  color: #ff6b35;
+}
+
+/* 响应式优化 */
+@media (max-width: 480px) {
+  .rv-tabbar-item__icon {
+    font-size: 20px;
+  }
+  
+  .rv-tabbar-item__text {
+    font-size: 10px;
+  }
+}

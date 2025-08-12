@@ -1,3 +1,8 @@
+// import mitt from 'mitt'
+
+// // 事件总线
+// export const emitter = mitt()
+
 // 防抖函数 - 优化搜索性能
 export function debounce(func, delay) {
   return function (args) {
@@ -47,3 +52,11 @@ export const storage = {
     localStorage.removeItem(key)
   }
 }
+
+
+// export function Toast(content, duration = 2000) {
+//     emitter.emit('toast', {
+//       content,
+//       duration
+//     })
+// }

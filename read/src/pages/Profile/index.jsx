@@ -7,21 +7,23 @@ import {
    Cell, 
    Badge, 
    Popup,
-   ActionSheet
+   ActionSheet,
+   Toast
   } from 'react-vant';
 import useTitle from '@/hooks/useTitle';
 import { useNavigate } from 'react-router-dom';
 import { useAppStore } from '@/store/useAppStore';
 import ThemeSwitch from '@/components/ThemeSwitch';
-// import {
-//   generateAvatar
-// } from '@llm'
+import {
+  generateAvatar
+} from '@/llm'
 
 const Profile = () => {
   const navigate = useNavigate();
   const { readingHistory, bookshelfBooks } = useAppStore();
   const [showRechargePopup, setShowRechargePopup] = useState(false);
   const [showActionSheet, setShowActionSheet] = useState(false);
+  const [loading, setLoading] = useState(false);
   // 用户信息
   const [userInfo,setUserInfo] = useState({
     avatar: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e',
@@ -37,12 +39,14 @@ const Profile = () => {
      {
             name: 'AI生成头像',
             color: '#123123',
-            type: 1
+            type: 1,
+            callback: () => handleAction({type: 1})
         },
         {
             name: '上传头像',
             color: '#ee0a24',
-            type: 2
+            type: 2,
+            callback: () => handleAction({type: 2})
         }
   ]
   // 功能菜单
@@ -79,7 +83,7 @@ const Profile = () => {
     {
       id: 1,
       name: '最近阅读',
-      icon: '📖',
+      icon: '�',
       arrow: true,
       count: readingHistory.length,
       action: () => navigate('/reading-history')
@@ -87,7 +91,7 @@ const Profile = () => {
     {
       id: 2,
       name: '我的书架',
-      icon: '📚',
+      icon: '�',
       arrow: true,
       count: bookshelfBooks.length,
       action: () => navigate('/bookshelf')
@@ -125,20 +129,53 @@ const Profile = () => {
   const handleRecharge = () => {
     setShowRechargePopup(true);
   };
-  const handleAction = async (e) => {
-    console.log(e)
-    if (e.type === 1) {
-      // AI 生成头像
-      const text = `
-        昵称：${userInfo.nickname}
-      `;
-      const newAvatar = await generateAvatar(text);
-
-    } else if (e.type === 2) {
-      // 图片上传
+  // 在handleAction函数中
+  const handleAction = async (action) => {
+    if (action.type === 1) {
+      try {
+        setLoading(true);
+        console.log('正在生成AI头像...');
+        
+        // Toast.show({
+        //   content: '正在生成AI头像...',
+        //   duration: 2000
+        // });
+        
+        const result = await generateAvatar(userInfo.nickname || '用户');
+        
+        if (result.code === 0) {
+          setUserInfo(prev => ({
+            ...prev,
+            avatar: result.data.imageUrl
+          }));
+          
+          // Toast.show({
+          //   content: `头像生成成功！来源：${result.source === 'doubao' ? '豆包AI' : '默认生成'}`,
+          //   duration: 2000
+          // });
+          
+          // 调试信息
+  
+        } else {
+          throw new Error('生成失败');
+        }
+      } catch (error) {
+        console.error('AI头像生成失败:', error);
+        // Toast.show({
+        //   content: '头像生成失败，请稍后重试',
+        //   duration: 2000
+        // });
+      } finally {
+        setLoading(false);
+        setShowActionSheet(false);
+      }
     }
-  }
-
+    else if (action.type === 2) {
+      // 上传头像
+    } 
+  
+  };
+  
   
   
   return (
@@ -256,9 +293,9 @@ const Profile = () => {
       <ActionSheet
         visible={showActionSheet}
         actions={actions}
+        onSelect={handleAction}
         cancelText='取消'
         onCancel={() => setShowActionSheet(false)}
-        onSelect={(e) => handleAction(e)}
       />
     </div>
   );

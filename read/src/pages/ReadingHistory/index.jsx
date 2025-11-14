@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { NavBar, Image, Button, ActionSheet, Toast, Empty } from 'react-vant';
 import { useNavigate } from 'react-router-dom';
 import { useAppStore } from '../../store/useAppStore';
+import { placeholder } from '@/utils';
 import './index.css';
 
 const ReadingHistory = () => {
@@ -76,7 +77,7 @@ const ReadingHistory = () => {
         onClickLeft={() => navigate(-1)}
         rightText="清空"
         onClickRight={() => {
-          // 这里可以添加清空历史的逻辑
+          useAppStore.getState().clearReadingHistory();
           Toast.success('历史记录已清空');
         }}
       />
@@ -92,7 +93,7 @@ const ReadingHistory = () => {
               >
                 <div className="book-cover">
                   <Image
-                    src={book.cover}
+                    src={book.cover || placeholder(60, 80)}
                     width="60"
                     height="80"
                     fit="cover"

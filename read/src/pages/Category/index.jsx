@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tabs, Image, Grid } from 'react-vant';
 import { useNavigate } from 'react-router-dom';
 import './index.css';
+import { placeholder } from '@/utils';
+import { getCategories } from '@/api/books';
 
 const Category = () => {
   const navigate = useNavigate();
@@ -15,75 +17,20 @@ const Category = () => {
   const categoryTabs = ['热门', '情节'];
   
   // 热门分类数据
-  const hotCategories = [
-    {
-      id: 1,
-      name: '都市',
-      cover: '/api/placeholder/100/130',
-      color: '#ff6b35'
-    },
-    {
-      id: 2,
-      name: '玄幻',
-      cover: '/api/placeholder/100/130',
-      color: '#4ecdc4'
-    },
-    {
-      id: 3,
-      name: '历史',
-      cover: '/api/placeholder/100/130',
-      color: '#45b7d1'
-    },
-    {
-      id: 4,
-      name: '科幻',
-      cover: '/api/placeholder/100/130',
-      color: '#96ceb4'
-    },
-    {
-      id: 5,
-      name: '游戏',
-      cover: '/api/placeholder/100/130',
-      color: '#feca57'
-    },
-    {
-      id: 6,
-      name: '悬疑',
-      cover: '/api/placeholder/100/130',
-      color: '#ff9ff3'
-    },
-    {
-      id: 7,
-      name: '仙侠',
-      cover: '/api/placeholder/100/130',
-      color: '#54a0ff'
-    },
-    {
-      id: 8,
-      name: '武侠',
-      cover: '/api/placeholder/100/130',
-      color: '#5f27cd'
-    },
-    {
-      id: 9,
-      name: '短故事',
-      cover: '/api/placeholder/100/130',
-      color: '#00d2d3'
-    }
-  ];
+  const [hotCategories, setHotCategories] = useState([])
   
   // 情节分类数据
-  const plotCategories = [
-    { id: 1, name: '扮猪吃虎', color: '#ff6b35' },
-    { id: 2, name: '强者归来', color: '#4ecdc4' },
-    { id: 3, name: '王者荣耀', color: '#45b7d1' },
-    { id: 4, name: '绝地求生', color: '#96ceb4' },
-    { id: 5, name: '升级流', color: '#feca57' },
-    { id: 6, name: '无敌流', color: '#ff9ff3' }
-  ];
+  const [plotCategories, setPlotCategories] = useState([])
+
+  useEffect(() => {
+    getCategories().then((res) => {
+      setHotCategories(res.hot || [])
+      setPlotCategories(res.plot || [])
+    })
+  }, [])
   
   const handleCategoryClick = (category) => {
-    console.log('点击分类:', category.name);
+    navigate(`/search?q=${encodeURIComponent(category.name)}`);
   };
   
   const handleTopNavClick = (nav) => {
@@ -139,7 +86,7 @@ const Category = () => {
                 >
                   <div className="category-cover">
                     <Image 
-                      src={category.cover}
+                      src={placeholder(100, 130)}
                       width="100"
                       height="130"
                       fit="cover"

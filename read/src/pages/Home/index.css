@@ -1,13 +1,13 @@
 .home-page {
-  background: #f5f5f5;
+  background: var(--bg-color);
   min-height: 100vh;
 }
 
 /* 分类导航 */
 .category-nav {
-  background: #fff;
+  background: var(--card-bg);
   padding: 12px 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .nav-items {
@@ -18,15 +18,17 @@
 
 .nav-item {
   font-size: 14px;
-  color: #333;
+  color: var(--text-color);
   font-weight: 500;
 }
 
 /* 推荐榜单 */
 .recommend-section {
-  background: #fff;
+  background: var(--card-bg);
   margin-top: 8px;
   padding: 16px;
+  box-shadow: var(--shadow);
+  border-radius: 12px;
 }
 
 .section-header {
@@ -43,14 +45,14 @@
 
 .tab {
   font-size: 16px;
-  color: #666;
+  color: var(--secondary-text);
   font-weight: 500;
   cursor: pointer;
   transition: color 0.3s;
 }
 
 .tab.active {
-  color: #ff6b35;
+  color: var(--primary-color);
   position: relative;
 }
 
@@ -61,13 +63,13 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: #ff6b35;
+  background: var(--primary-color);
   border-radius: 1px;
 }
 
 .more-btn {
   font-size: 12px;
-  color: #999;
+  color: var(--tertiary-text);
 }
 
 .book-list {
@@ -81,14 +83,15 @@
   align-items: flex-start;
   gap: 8px;
   padding: 8px;
-  background: #fafafa;
-  border-radius: 8px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
 }
 
 .book-rank {
   width: 20px;
   height: 20px;
-  background: #ff6b35;
+  background: var(--primary-color);
   color: #fff;
   border-radius: 50%;
   display: flex;
@@ -120,7 +123,7 @@
 .book-title {
   font-size: 13px;
   font-weight: 500;
-  color: #333;
+  color: var(--text-color);
   margin-bottom: 4px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -129,15 +132,17 @@
 
 .book-author {
   font-size: 11px;
-  color: #999;
+  color: var(--tertiary-text);
   margin-bottom: 4px;
 }
 
 /* 热门分类 */
 .hot-category-section {
-  background: #fff;
+  background: var(--card-bg);
   margin-top: 8px;
   padding: 16px;
+  box-shadow: var(--shadow);
+  border-radius: 12px;
 }
 
 .section-title {
@@ -147,7 +152,7 @@
   margin-bottom: 16px;
   font-size: 16px;
   font-weight: 600;
-  color: #333;
+  color: var(--text-color);
 }
 
 .category-grid {
@@ -178,7 +183,7 @@
 
 .hot-book-item .book-title {
   font-size: 12px;
-  color: #333;
+  color: var(--text-color);
   margin: 8px 0 4px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -187,6 +192,79 @@
 
 .hot-book-item .book-score {
   font-size: 11px;
-  color: #ff6b35;
+  color: var(--primary-color);
   font-weight: 500;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .recommend-section,
+  .hot-category-section {
+    margin: 8px 12px;
+    padding: 12px;
+    border-radius: 8px;
+  }
+  
+  .category-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  
+  .category-item {
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+  
+  .hot-books {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  
+  .book-list {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .book-item {
+    padding: 12px;
+  }
+  
+  .book-title {
+    font-size: 14px;
+  }
+  
+  .book-author {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .recommend-section,
+  .hot-category-section {
+    margin: 4px 8px;
+    padding: 10px;
+  }
+  
+  .category-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  
+  .category-item {
+    padding: 4px 6px;
+    font-size: 10px;
+  }
+  
+  .hot-books {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+  
+  .tabs {
+    gap: 12px;
+  }
+  
+  .tab {
+    font-size: 14px;
+  }
 }

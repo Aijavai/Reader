@@ -17,22 +17,7 @@ const SearchHistory = () => {
     navigate(`/search?q=${encodeURIComponent(keyword)}`);
   };
 
-  const formatTime = (timestamp) => {
-    const now = new Date();
-    const searchTime = new Date(timestamp);
-    const diff = now - searchTime;
-    
-    const minutes = Math.floor(diff / (1000 * 60));
-    const hours = Math.floor(diff / (1000 * 60 * 60));
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    
-    if (minutes < 1) return '刚刚';
-    if (minutes < 60) return `${minutes}分钟前`;
-    if (hours < 24) return `${hours}小时前`;
-    if (days < 7) return `${days}天前`;
-    
-    return searchTime.toLocaleDateString();
-  };
+  const formatTime = () => '';
 
   return (
     <div className="search-history">
@@ -55,18 +40,14 @@ const SearchHistory = () => {
               {searchHistory.map((item, index) => (
                 <div key={index} className="history-item">
                   <Cell
-                    title={item.keyword}
-                    label={`搜索时间: ${formatTime(item.timestamp)}`}
+                    title={item}
+                    label={''}
                     rightIcon="search"
                     clickable
-                    onClick={() => handleSearchAgain(item.keyword)}
+                    onClick={() => handleSearchAgain(item)}
                   >
                     <div className="history-meta">
-                      {item.resultCount !== undefined && (
-                        <Tag size="small" color="#f0f0f0" textColor="#666">
-                          {item.resultCount} 个结果
-                        </Tag>
-                      )}
+                      
                     </div>
                   </Cell>
                 </div>

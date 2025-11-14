@@ -264,7 +264,87 @@
   }
 }
 
-@media (min-width: 414px) {
+/* 增强移动端适配 */
+@media (max-width: 768px) {
+  .bookshelf-page {
+    padding-bottom: 80px;
+  }
+  
+  .bookshelf-header {
+    padding: 16px;
+  }
+  
+  .header-title {
+    font-size: 18px;
+  }
+  
+  .bookshelf-content {
+    padding: 0 16px 16px;
+  }
+  
+  .books-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  
+  .book-item {
+    width: 100%;
+  }
+  
+  .book-cover-container {
+    width: 100%;
+    aspect-ratio: 3/4;
+  }
+  
+  .add-book-card {
+    width: 100%;
+    aspect-ratio: 3/4;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .bookshelf-header {
+    padding: 12px;
+  }
+  
+  .header-title {
+    font-size: 16px;
+  }
+  
+  .bookshelf-content {
+    padding: 0 12px 12px;
+  }
+  
+  .books-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .book-title {
+    font-size: 11px;
+    max-width: none;
+  }
+  
+  .book-meta {
+    font-size: 10px;
+  }
+  
+  .progress-text {
+    font-size: 9px;
+    padding: 1px 4px;
+  }
+  
+  .plus-icon {
+    font-size: 32px;
+  }
+  
+  .empty-bookshelf {
+    padding: 40px 16px;
+  }
+}
+
+@media (min-width: 414px) and (max-width: 768px) {
   .books-grid {
     grid-template-columns: repeat(4, 1fr);
   }

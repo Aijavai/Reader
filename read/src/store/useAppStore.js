@@ -65,11 +65,40 @@ const useAppStore = create((set, get) => {
     // 阅读历史管理
     addReadingHistory: (book) => {
       const { readingHistory } = get()
-      const newHistory = [book, ...readingHistory.filter(item => item.id !== book.id)]
+      const prev = readingHistory.find((i) => i.id === book.id) || {}
+      const merged = { ...prev, ...book, readTime: Date.now() }
+      const newHistory = [merged, ...readingHistory.filter(item => item.id !== book.id)]
       const limitedHistory = newHistory.slice(0, 50)
-      
       set({ readingHistory: limitedHistory })
       storage.set('readingHistory', limitedHistory)
+    },
+    updateReadingProgress: (bookId, progress) => {
+      const { readingHistory } = get()
+      const updated = readingHistory.map((item) =>
+        item.id === bookId ? { ...item, ...progress, readTime: Date.now() } : item
+      )
+      set({ readingHistory: updated })
+      storage.set('readingHistory', updated)
+    },
+    updateBookshelfProgress: (bookId, percentage) => {
+      const { bookshelfBooks } = get()
+      const updated = bookshelfBooks.map((b) =>
+        b.id === bookId ? { ...b, progress: percentage } : b
+      )
+      set({ bookshelfBooks: updated })
+      storage.set('bookshelfBooks', updated)
+    },
+    updateBookshelfMeta: (bookId, patch) => {
+      const { bookshelfBooks } = get()
+      const updated = bookshelfBooks.map((b) =>
+        b.id === bookId ? { ...b, ...patch } : b
+      )
+      set({ bookshelfBooks: updated })
+      storage.set('bookshelfBooks', updated)
+    },
+    clearReadingHistory: () => {
+      set({ readingHistory: [] })
+      storage.remove('readingHistory')
     },
     
     // 书架管理

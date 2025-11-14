@@ -133,22 +133,93 @@
 }
 
 /* 响应式设计 */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
+  .reading-history-page {
+    padding-bottom: 80px;
+  }
+  
   .history-content {
-    padding: 12px;
+    padding: 16px;
+  }
+  
+  .history-list {
+    gap: 10px;
   }
   
   .history-item {
-    padding: 12px;
+    padding: 14px;
     gap: 10px;
+  }
+  
+  .book-cover {
+    width: 60px;
+    height: 80px;
   }
   
   .book-title {
     font-size: 15px;
   }
   
+  .book-meta {
+    gap: 6px;
+  }
+  
+  .book-author,
+  .book-category {
+    font-size: 11px;
+    padding: 1px 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .history-content {
+    padding: 12px;
+  }
+  
+  .history-list {
+    gap: 8px;
+  }
+  
+  .history-item {
+    padding: 12px;
+    gap: 8px;
+  }
+  
+  .book-cover {
+    width: 50px;
+    height: 67px;
+  }
+  
+  .book-title {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+  
+  .book-meta {
+    gap: 4px;
+    margin-bottom: 6px;
+  }
+  
+  .book-author,
+  .book-category {
+    font-size: 10px;
+    padding: 1px 4px;
+  }
+  
+  .progress-text {
+    font-size: 11px;
+  }
+  
+  .read-time {
+    font-size: 10px;
+  }
+  
   .action-btn .rv-button {
     font-size: 12px;
-    padding: 4px 12px;
+    padding: 4px 10px;
+  }
+  
+  .empty-state {
+    padding: 40px 16px;
   }
 }

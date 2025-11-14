@@ -166,7 +166,51 @@
 }
 
 /* 响应式设计 */
-@media (max-width: 375px) {
+@media (max-width: 768px) {
+  .category-page {
+    padding-bottom: 80px;
+  }
+  
+  .top-navigation {
+    padding: 10px 16px;
+  }
+  
+  .nav-items {
+    gap: 20px;
+  }
+  
+  .category-tabs {
+    padding: 12px 16px 0;
+    gap: 24px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .category-content {
+    padding: 16px;
+  }
+  
+  .section-title {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .plot-tags-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-navigation {
+    padding: 8px 12px;
+  }
+  
   .nav-items {
     gap: 16px;
   }
@@ -176,12 +220,22 @@
   }
   
   .category-tabs {
-    gap: 24px;
+    padding: 10px 12px 0;
+    gap: 20px;
+  }
+  
+  .category-tab {
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  
+  .category-content {
+    padding: 12px;
   }
   
   .categories-grid {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 10px;
   }
   
   .category-card {
@@ -189,14 +243,18 @@
     gap: 10px;
   }
   
+  .category-name {
+    font-size: 14px;
+  }
+  
   .plot-tags-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 8px;
   }
   
   .plot-tag {
-    padding: 10px 12px;
-    font-size: 13px;
+    padding: 8px 12px;
+    font-size: 12px;
   }
 }
 

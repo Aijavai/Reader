@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { NavBar, Search, Tag, Cell, Image, Loading } from 'react-vant';
-import { useNavigate } from 'react-router-dom';
+import { NavBar, Search, Tag, Cell, Image, Loading, Toast } from 'react-vant';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import useAppStore from '../../store/useAppStore';
-import { debounce } from '../../utils';
+import { debounce, placeholder } from '../../utils';
+import { searchBooks } from '@/api/books';
 import './index.css';
 
 const SearchPage = () => {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState('');
-  const [activeTab, setActiveTab] = useState('创来漫画');
+  const [activeTab, setActiveTab] = useState('');
   const [showResults, setShowResults] = useState(false);
   
   const { 
@@ -111,26 +112,29 @@ const SearchPage = () => {
   const debouncedSearch = React.useMemo(() => {
     return debounce(async (keyword) => {
       if (!keyword.trim()) return;
-      
       setSearching(true);
       try {
-        // 模拟搜索API调用
-        await new Promise(resolve => setTimeout(resolve, 500));
-        
-        // 模拟搜索结果
-        const mockResults = hotSearchList.filter(book => 
-          book.title.includes(keyword) || book.author.includes(keyword)
-        );
-        
-        setSearchResults(mockResults);
+        const results = await searchBooks(keyword);
+        setSearchResults(results || []);
         setShowResults(true);
       } catch (error) {
-        console.error('搜索失败:', error);
+        Toast.fail('搜索失败，请稍后重试');
       } finally {
         setSearching(false);
       }
     }, 300);
-  }, [setSearching, setSearchResults, hotSearchList]);
+  }, [setSearching, setSearchResults]);
+
+  const [params] = useSearchParams();
+  useEffect(() => {
+    const q = params.get('q');
+    if (q) {
+      setSearchValue(q);
+      addSearchHistory(q);
+      debouncedSearch(q);
+      setActiveTab(q);
+    }
+  }, [params]);
 
   const handleSearch = (value) => {
     if (value.trim()) {
@@ -138,6 +142,13 @@ const SearchPage = () => {
       debouncedSearch(value);
     }
   };
+
+  useEffect(() => {
+    if (!searchValue.trim()) {
+      setShowResults(false);
+      setSearchResults([]);
+    }
+  }, [searchValue]);
 
   const handleTagClick = (tag) => {
     setSearchValue(tag);
@@ -150,25 +161,21 @@ const SearchPage = () => {
   };
 
   const handleBookClick = (book) => {
-    // 跳转到书籍详情页
-    console.log('点击书籍:', book.title);
+    navigate(`/book/${book.id}`);
   };
 
   return (
     <div className="search-page">
       {/* 顶部导航 */}
       <NavBar
-        title=""
-        leftText=""
+        title="搜索"
+        leftArrow
         rightText="搜索"
         onClickLeft={() => navigate(-1)}
         onClickRight={() => handleSearch(searchValue)}
         className="search-navbar"
       >
         <div className="search-header">
-          <div className="back-btn" onClick={() => navigate(-1)}>
-            ←
-          </div>
           <Search
             value={searchValue}
             onChange={setSearchValue}
@@ -237,7 +244,7 @@ const SearchPage = () => {
                   >
                     <div className="rank-number">{index + 1}</div>
                     <Image
-                      src={book.cover}
+                      src={placeholder(60, 80)}
                       className="book-cover"
                       fit="cover"
                     />
@@ -280,7 +287,7 @@ const SearchPage = () => {
                     >
                       <div className="result-rank">{index + 1}</div>
                       <Image
-                        src={book.cover}
+                        src={placeholder(60, 80)}
                         className="result-cover"
                         fit="cover"
                       />

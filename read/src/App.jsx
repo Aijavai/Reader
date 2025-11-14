@@ -9,7 +9,7 @@ import {
   Route,
   Navigate
 } from 'react-router-dom'
-import { useAppStore } from './store/useAppStore'
+import useAppStore from './store/useAppStore'
 
 // 导入组件
 import Loading from './components/Loading'
@@ -26,6 +26,7 @@ const Search = lazy(() => import('./pages/Search'))
 const Settings = lazy(() => import('./pages/Settings'))
 const ReadingHistory = lazy(() => import('./pages/ReadingHistory'))
 const SearchHistory = lazy(() => import('./pages/SearchHistory'))
+const Reader = lazy(() => import('./pages/Reader'))
 
 function App() {
   const { theme } = useAppStore();
@@ -53,6 +54,7 @@ function App() {
             <Route path='/settings' element={<Settings />} />
             <Route path='/reading-history' element={<ReadingHistory />} />
             <Route path='/search-history' element={<SearchHistory />} />
+            <Route path='/reader/:id' element={<Reader />} />
           </Route>
         </Routes>
       </Suspense>

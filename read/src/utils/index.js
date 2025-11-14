@@ -4,14 +4,11 @@
 // export const emitter = mitt()
 
 // 防抖函数 - 优化搜索性能
-export function debounce(func, delay) {
-  return function (args) {
-    let that = this
-    let _args = args
-    clearTimeout(func.id)
-    func.id = setTimeout(function () {
-      func.call(that, _args)
-    }, delay)
+export function debounce(fn, delay = 300) {
+  let timer
+  return function (...args) {
+    clearTimeout(timer)
+    timer = setTimeout(() => fn.apply(this, args), delay)
   }
 }
 
@@ -51,6 +48,10 @@ export const storage = {
   remove(key) {
     localStorage.removeItem(key)
   }
+}
+
+export function placeholder(width = 80, height = 100) {
+  return `https://placehold.co/${width}x${height}/png`
 }
 
 

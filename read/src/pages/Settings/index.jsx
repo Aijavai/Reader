@@ -53,12 +53,12 @@ const Settings = () => {
         Toast.success('搜索历史已清除');
         break;
       case 'reading':
-        // 这里可以添加清除阅读历史的逻辑
+        useAppStore.getState().clearReadingHistory();
         Toast.success('阅读历史已清除');
         break;
       case 'all':
         clearSearchHistory();
-        // 清除其他数据
+        useAppStore.getState().clearReadingHistory();
         Toast.success('所有数据已清除');
         break;
     }

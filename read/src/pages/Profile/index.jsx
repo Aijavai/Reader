@@ -1,5 +1,5 @@
 import './index.css';
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { 
   Button,
    Image, 
@@ -141,8 +141,8 @@ const Profile = () => {
         //   duration: 2000
         // });
         
-        const result = await generateAvatar(userInfo.nickname || '用户');
-        
+        // const result = await generateAvatar(userInfo.nickname || '用户');
+        const result = await generateAvatar();
         if (result.code === 0) {
           setUserInfo(prev => ({
             ...prev,

@@ -103,13 +103,26 @@
 }
 
 /* 响应式设计 */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
+  .search-history {
+    padding-bottom: 80px;
+  }
+  
   .search-history-content {
-    padding: 12px;
+    padding: 16px;
+  }
+  
+  .history-stats {
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+  
+  .history-list {
+    border-radius: 10px;
   }
   
   .history-item .rv-cell {
-    padding: 14px;
+    padding: 15px;
   }
   
   .history-item .rv-cell__title {
@@ -118,6 +131,48 @@
   
   .history-item .rv-cell__label {
     font-size: 11px;
+  }
+  
+  .empty-history {
+    min-height: 50vh;
+    padding: 30px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-history-content {
+    padding: 12px;
+  }
+  
+  .history-stats {
+    font-size: 12px;
+    margin-bottom: 12px;
+    padding: 0 2px;
+  }
+  
+  .history-list {
+    border-radius: 8px;
+  }
+  
+  .history-item .rv-cell {
+    padding: 12px;
+  }
+  
+  .history-item .rv-cell__title {
+    font-size: 13px;
+  }
+  
+  .history-item .rv-cell__label {
+    font-size: 10px;
+  }
+  
+  .history-item .rv-cell__right-icon {
+    font-size: 14px;
+  }
+  
+  .empty-history {
+    min-height: 40vh;
+    padding: 20px 12px;
   }
 }
 

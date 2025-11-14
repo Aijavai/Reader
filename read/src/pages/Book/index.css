@@ -132,3 +132,111 @@
 .read-btn {
   flex: 2;
 }
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .book-page {
+    padding-bottom: 80px;
+  }
+  
+  .book-header {
+    padding: 16px;
+  }
+  
+  .book-cover {
+    width: 100px;
+    height: 140px;
+  }
+  
+  .book-title {
+    font-size: 18px;
+  }
+  
+  .book-author {
+    font-size: 13px;
+  }
+  
+  .book-tags {
+    gap: 6px;
+  }
+  
+  .tag {
+    padding: 3px 8px;
+    font-size: 11px;
+  }
+  
+  .book-stats {
+    gap: 16px;
+  }
+  
+  .stat-value {
+    font-size: 16px;
+  }
+  
+  .stat-label {
+    font-size: 11px;
+  }
+  
+  .book-description {
+    padding: 16px;
+  }
+  
+  .chapter-info {
+    padding: 16px;
+  }
+  
+  .action-buttons {
+    padding: 10px 16px;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .book-header {
+    padding: 12px;
+  }
+  
+  .book-info {
+    gap: 8px;
+  }
+  
+  .book-cover {
+    width: 80px;
+    height: 112px;
+  }
+  
+  .book-title {
+    font-size: 16px;
+  }
+  
+  .book-author {
+    font-size: 12px;
+  }
+  
+  .book-stats {
+    gap: 12px;
+  }
+  
+  .stat-value {
+    font-size: 14px;
+  }
+  
+  .stat-label {
+    font-size: 10px;
+  }
+  
+  .tag {
+    padding: 2px 6px;
+    font-size: 10px;
+  }
+  
+  .book-description,
+  .chapter-info {
+    padding: 12px;
+  }
+  
+  .action-buttons {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+}

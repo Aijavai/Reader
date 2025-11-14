@@ -8,7 +8,7 @@ const Loading = () => {
       justifyContent: 'center',
       alignItems: 'center',
       height: '100vh',
-      backgroundColor: '#f5f5f5'
+      backgroundColor: 'var(--bg-color)'
     }}>
       <VantLoading size="24px" color="#ff6b35" />
     </div>

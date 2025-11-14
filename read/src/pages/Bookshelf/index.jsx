@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { NavBar, Button, Image, Progress, Grid, ActionSheet, Toast, Empty } from 'react-vant';
 import { useNavigate } from 'react-router-dom';
 import { useAppStore } from '../../store/useAppStore';
+import { placeholder } from '@/utils';
 import './index.css';
 
 const Bookshelf = () => {
   const navigate = useNavigate();
-  const { bookshelfBooks, removeFromBookshelf, addReadingHistory } = useAppStore();
+  const { bookshelfBooks, removeFromBookshelf, addReadingHistory, readingHistory } = useAppStore();
   const [showActionSheet, setShowActionSheet] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   
@@ -73,11 +74,11 @@ const Bookshelf = () => {
           <span className="header-icon">🔍</span>
           <span className="search-text">搜索</span>
         </div>
-        <div className="header-center">
+        <div className="header-center" onClick={() => navigate('/reading-history')}>
           <span className="header-icon">🕐</span>
           <span className="history-text">历史</span>
         </div>
-        <div className="header-right">
+        <div className="header-right" onClick={() => navigate('/settings')}>
           <span className="header-icon">⋯</span>
           <span className="more-text">更多</span>
         </div>
@@ -113,9 +114,9 @@ const Bookshelf = () => {
                 <Grid.Item key={book.id}>
                   <div className="book-item" onClick={() => handleBookAction(book)}>
                     <div className="book-cover">
-                      <Image src={book.cover} fit="cover" />
+                      <Image src={book.cover || placeholder(100, 130)} fit="cover" />
                       <div className="book-progress">
-                        <Progress percentage={book.progress || 0} strokeWidth={3} color="#ff6b35" />
+                        <Progress percentage={(book.progress ?? (readingHistory.find(i => i.id === book.id)?.percent)) || 0} strokeWidth={3} color="#ff6b35" />
                       </div>
                     </div>
                     <div className="book-info">

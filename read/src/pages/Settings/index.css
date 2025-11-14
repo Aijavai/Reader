@@ -77,12 +77,53 @@
 }
 
 /* 响应式设计 */
+@media (max-width: 768px) {
+  .settings-page {
+    padding-bottom: 80px;
+  }
+  
+  .settings-content {
+    padding: 16px;
+  }
+  
+  .settings-section {
+    margin-bottom: 20px;
+  }
+  
+  .section-title {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .rv-cell {
+    padding: 14px 16px !important;
+  }
+}
+
 @media (max-width: 480px) {
   .settings-content {
     padding: 12px;
   }
   
   .settings-section {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+  }
+  
+  .section-title {
+    font-size: 13px;
+    margin-bottom: 8px;
+    padding: 0 2px;
+  }
+  
+  .rv-cell {
+    padding: 12px 14px !important;
+  }
+  
+  .rv-cell__title {
+    font-size: 14px !important;
+  }
+  
+  .rv-cell__value {
+    font-size: 13px !important;
   }
 }

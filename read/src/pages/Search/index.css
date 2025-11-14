@@ -1,12 +1,12 @@
 .search-page {
   min-height: 100vh;
-  background-color: #f5f5f5;
+  background-color: var(--bg-color);
 }
 
 /* 顶部导航样式 */
 .search-navbar {
-  background: white;
-  border-bottom: 1px solid #eee;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border-color);
   padding: 0;
 }
 
@@ -27,12 +27,12 @@
 
 .search-input {
   flex: 1;
-  background: #f5f5f5;
+  background: var(--bg-color);
   border-radius: 20px;
 }
 
 .search-input .rv-search__content {
-  background: #f5f5f5;
+  background: var(--bg-color);
   border-radius: 20px;
   padding: 8px 16px;
 }
@@ -44,7 +44,7 @@
 }
 
 .search-btn {
-  color: #ff6b35;
+  color: var(--primary-color);
   font-size: 14px;
   cursor: pointer;
   padding: 8px 12px;
@@ -79,8 +79,8 @@
 }
 
 .history-tag {
-  background: #f0f0f0;
-  color: #666;
+  background: var(--bg-color);
+  color: var(--secondary-text);
   border: none;
   border-radius: 16px;
   padding: 6px 12px;
@@ -90,19 +90,21 @@
 }
 
 .history-tag.active {
-  background: #ff6b35;
+  background: var(--primary-color);
   color: white;
 }
 
 .history-tag:hover {
-  background: #e0e0e0;
+  background: var(--card-bg);
 }
 
 .history-tag.active:hover {
   background: #ff5722;
+}
+
 .clear-history {
   font-size: 14px;
-  color: #666;
+  color: var(--secondary-text);
   cursor: pointer;
   padding: 4px 8px;
   border-radius: 4px;
@@ -110,8 +112,7 @@
 }
 
 .clear-history:hover {
-  background-color: #f5f5f5;
-}  padding: 4px;
+  background-color: var(--bg-color);
 }
 
 .section-title {
@@ -163,17 +164,17 @@
 
 /* 热搜榜列表 */
 .hot-search-list {
-  background: white;
+  background: var(--card-bg);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow);
 }
 
 .hot-search-item {
   display: flex;
   align-items: center;
   padding: 12px 16px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--border-color);
   cursor: pointer;
   transition: background-color 0.2s;
 }
@@ -183,7 +184,7 @@
 }
 
 .hot-search-item:hover {
-  background-color: #f8f8f8;
+  background-color: var(--bg-color);
 }
 
 .hot-search-item:active {
@@ -241,7 +242,7 @@
 .book-title {
   font-size: 15px;
   font-weight: 600;
-  color: #333;
+  color: var(--text-color);
   margin: 0 0 6px 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -254,7 +255,7 @@
   gap: 8px;
   margin-bottom: 4px;
   font-size: 12px;
-  color: #666;
+  color: var(--secondary-text);
 }
 
 .book-author,
@@ -264,7 +265,7 @@
 }
 
 .book-status {
-  color: #ff6b35;
+  color: var(--primary-color);
 }
 
 .search-count {
@@ -274,10 +275,10 @@
 
 /* 搜索结果页面 */
 .search-results {
-  background: white;
+  background: var(--card-bg);
   border-radius: 12px;
   padding: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow);
 }
 
 .results-header {
@@ -292,12 +293,12 @@
 .results-header span:first-child {
   font-size: 16px;
   font-weight: 600;
-  color: #333;
+  color: var(--text-color);
 }
 
 .results-count {
   font-size: 12px;
-  color: #666;
+  color: var(--secondary-text);
 }
 
 .loading-container {
@@ -324,7 +325,7 @@
 }
 
 .result-item:hover {
-  background-color: #f9f9f9;
+  background-color: var(--bg-color);
 }
 
 .result-rank {
@@ -358,7 +359,7 @@
 .result-title {
   font-size: 16px;
   font-weight: 500;
-  color: #333;
+  color: var(--text-color);
   margin: 0 0 8px 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -375,8 +376,8 @@
 .result-status,
 .result-words {
   font-size: 12px;
-  color: #666;
-  background: #f5f5f5;
+  color: var(--secondary-text);
+  background: var(--bg-color);
   padding: 2px 6px;
   border-radius: 10px;
 }
@@ -402,13 +403,13 @@
 
 .no-results-text {
   font-size: 16px;
-  color: #333;
+  color: var(--text-color);
   margin-bottom: 8px;
 }
 
 .no-results-tip {
   font-size: 14px;
-  color: #666;
+  color: var(--secondary-text);
 }
 
 /* 响应式设计 */

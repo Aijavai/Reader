@@ -1,120 +1,79 @@
-/* 全局主题变量 */
 :root {
-  --primary-color: #ff6b35;
-  --bg-color: #f5f5f5;
-  --card-bg: #fff;
-  --text-color: #333;
-  --secondary-text: #666;
-  --tertiary-text: #999;
-  --border-color: #eee;
-  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  --navbar-bg: #fff;
-  --tabbar-bg: #fff;
-}
-
-/* 暗色主题 */
-[data-theme="dark"] {
-  --bg-color: #1a1a1a;
-  --card-bg: #2a2a2a;
-  --text-color: #fff;
-  --secondary-text: #ccc;
-  --tertiary-text: #999;
-  --border-color: #333;
-  --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --navbar-bg: #2a2a2a;
-  --tabbar-bg: #2a2a2a;
-}
-
-/* 全局样式 */
-* {
-  box-sizing: border-box;
+  --rv-primary-color: #ff6b35;
+  --rv-text-color: #333;
+  --rv-background-color: #f7f8fa;
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
 }
 
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--rv-background-color);
+  color: var(--rv-text-color);
+  overflow-x: hidden;
 }
 
-/* React Vant 组件主题适配 */
-[data-theme="dark"] .rv-nav-bar {
-  background: var(--navbar-bg) !important;
-  color: var(--text-color) !important;
+#root {
+  max-width: 100%;
+  margin: 0 auto;
 }
 
-[data-theme="dark"] .rv-nav-bar__title {
-  color: var(--text-color) !important;
+/* Page transition animations */
+.page-enter {
+  opacity: 0;
+  transform: translateX(20px);
 }
 
-[data-theme="dark"] .rv-nav-bar__left,
-[data-theme="dark"] .rv-nav-bar__right {
-  color: var(--text-color) !important;
+.page-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
 }
 
-[data-theme="dark"] .rv-tabbar {
-  background: var(--tabbar-bg) !important;
-  border-top-color: var(--border-color) !important;
+.page-exit {
+  opacity: 1;
+  transform: translateX(0);
 }
 
-[data-theme="dark"] .rv-tabbar-item {
-  color: var(--secondary-text) !important;
+.page-exit-active {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 300ms, transform 300ms;
 }
 
-[data-theme="dark"] .rv-tabbar-item--active {
-  color: var(--primary-color) !important;
-}
-
-[data-theme="dark"] .rv-popup {
-  background: var(--card-bg) !important;
-}
-
-[data-theme="dark"] .rv-action-sheet {
-  background: var(--card-bg) !important;
-}
-
-[data-theme="dark"] .rv-toast {
-  background: var(--card-bg) !important;
-  color: var(--text-color) !important;
-}
-
-/* 滚动条样式 */
+/* Global Scrollbar styling */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-color);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--border-color);
+  background: #ccc;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--secondary-text);
+  background: #999;
 }
 
-/* 响应式字体大小 */
-.font-size-14 {
-  font-size: 14px !important;
+/* Utility classes */
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.font-size-16 {
-  font-size: 16px !important;
-}
-
-.font-size-18 {
-  font-size: 18px !important;
-}
-
-.font-size-20 {
-  font-size: 20px !important;
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

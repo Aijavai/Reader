@@ -27,6 +27,7 @@ const Settings = lazy(() => import('./pages/Settings'))
 const ReadingHistory = lazy(() => import('./pages/ReadingHistory'))
 const SearchHistory = lazy(() => import('./pages/SearchHistory'))
 const Reader = lazy(() => import('./pages/Reader'))
+const Chat = lazy(() => import('./pages/Chat'))
 
 function App() {
   const { theme } = useAppStore();
@@ -44,8 +45,9 @@ function App() {
             <Route path='/' element={<Navigate to='/home' />} />
             <Route path='/home' element={<Home />} />
             <Route path='/category' element={<Category />} />
-            <Route path='/profile' element={<Profile />} />
             <Route path='/bookshelf' element={<Bookshelf />} />
+            <Route path='/chat' element={<Chat />} />
+            <Route path='/profile' element={<Profile />} />
             
           </Route>
           <Route element={<BlankLayout />}>

@@ -14,7 +14,7 @@ const useAppStore = create((set, get) => {
     
     // 用户偏好
     theme: storage.get('theme') || 'light',
-    fontSize: storage.get('fontSize') || 'medium',
+    fontSize: storage.get('fontSize') || 16,
     
     // 阅读历史
     readingHistory: storage.get('readingHistory') || [],

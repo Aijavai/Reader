@@ -1,5 +1,5 @@
-import React from 'react'
-import { NavBar, Button, Popup, Cell, Toast, ActionSheet } from 'react-vant'
+import React, { useRef, useEffect, useState } from 'react'
+import { Button, Popup, Cell, Toast, Slider } from 'react-vant'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAppStore } from '@/store/useAppStore'
 import { placeholder } from '@/utils'
@@ -10,6 +10,13 @@ function genChapters() {
   return Array.from({ length: 20 }).map((_, i) => ({ id: i + 1, title: `第${i + 1}章 内容 ${i + 1}` }))
 }
 
+const READER_THEMES = {
+  light: { background: '#ffffff', color: '#333333', name: '默认' },
+  night: { background: '#1a1a1a', color: '#888888', name: '夜间' },
+  eye: { background: '#cce8cf', color: '#333333', name: '护眼' },
+  parchment: { background: '#f5f5d5', color: '#5a4a42', name: '羊皮' },
+}
+
 export default function Reader() {
   const navigate = useNavigate()
   const { id } = useParams()
@@ -18,6 +25,7 @@ export default function Reader() {
     updateReadingProgress,
     addReadingHistory,
     bookshelfBooks,
+    theme: appTheme,
   } = useAppStore()
 
   const book =
@@ -28,17 +36,27 @@ export default function Reader() {
       cover: placeholder(120, 160),
     }
 
-  const [visible, setVisible] = React.useState(false)
-  const [settingsVisible, setSettingsVisible] = React.useState(false)
-  const [current, setCurrent] = React.useState(0)
-  const [chapters, setChapters] = React.useState(genChapters())
+  const [visible, setVisible] = useState(false)
+  const [settingsVisible, setSettingsVisible] = useState(false)
+  const [current, setCurrent] = useState(0)
+  const [chapters, setChapters] = useState(genChapters())
+  const [readerTheme, setReaderTheme] = useState('light')
+  const contentRef = useRef(null)
 
-  React.useEffect(() => {
+  useEffect(() => {
     addReadingHistory({ id: book.id, title: book.title, author: book.author, cover: book.cover })
     getChapters(book.id).then((res) => {
       setChapters(Array.isArray(res) ? res : genChapters())
     })
+    // Initialize theme based on app theme or default
+    if (appTheme === 'dark') setReaderTheme('night')
   }, [])
+
+  useEffect(() => {
+    if (contentRef.current) {
+      contentRef.current.scrollTop = 0
+    }
+  }, [current])
 
   const goChapter = (index) => {
     setCurrent(index)
@@ -47,80 +65,223 @@ export default function Reader() {
     useAppStore.getState().updateBookshelfProgress(book.id, percent)
   }
 
-  const prev = () => {
+  const prev = (e) => {
+    e?.stopPropagation()
     if (current > 0) goChapter(current - 1)
     else Toast.info('已经是第一章')
   }
 
-  const next = () => {
+  const next = (e) => {
+    e?.stopPropagation()
     if (current < chapters.length - 1) goChapter(current + 1)
     else Toast.info('已经是最后一章')
   }
 
-  return (
-    <div className="reader-page">
-      <NavBar
-        title={book.title}
-        leftArrow
-        rightText="章节"
-        onClickLeft={() => navigate(-1)}
-        onClickRight={() => setVisible(true)}
-      />
+  const handleContentClick = (e) => {
+    const width = window.innerWidth
+    const x = e.clientX
 
-      <div className="reader-content" style={{ fontSize }}>
-        <h2 className="chapter-title">{chapters[current].title}</h2>
-        <div className="chapter-body">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <p key={i}>
-              这是示例章节内容段落 {i + 1}。为了演示阅读器功能，文本使用占位内容并根据设置的字体大小进行展示。
-            </p>
-          ))}
+    // Center 40% triggers menu
+    if (x > width * 0.3 && x < width * 0.7) {
+      setSettingsVisible(!settingsVisible)
+    } else if (x <= width * 0.3) {
+      prev()
+    } else {
+      next()
+    }
+  }
+
+  const currentThemeStyle = READER_THEMES[readerTheme]
+
+  return (
+    <div
+      className="reader-page"
+      style={{
+        backgroundColor: currentThemeStyle.background,
+        color: currentThemeStyle.color
+      }}
+    >
+      {/* 始终显示的顶部浮动退出按钮 */}
+      <div
+        className={`reader-fab-header ${settingsVisible ? 'hidden' : ''}`}
+        style={{ color: currentThemeStyle.color }}
+      >
+        <button
+          className="fab-back-btn"
+          style={{ color: currentThemeStyle.color, borderColor: currentThemeStyle.color + '40' }}
+          onClick={() => navigate(-1)}
+        >
+          ‹ 退出
+        </button>
+        <span className="fab-title">{book.title}</span>
+        <button
+          className="fab-menu-btn"
+          style={{ color: currentThemeStyle.color, borderColor: currentThemeStyle.color + '40' }}
+          onClick={() => setSettingsVisible(true)}
+        >
+          ☰
+        </button>
+      </div>
+
+      {/* Header - visible only when settings are open */}
+      <div className={`reader-header ${settingsVisible ? 'visible' : ''}`}>
+        <div className="custom-nav-bar" style={{ backgroundColor: currentThemeStyle.background, color: currentThemeStyle.color }}>
+          <div className="nav-left" onClick={() => navigate(-1)}>
+            <i className="rv-icon rv-icon-arrow-left" style={{ fontSize: 20 }} />
+          </div>
+          <div className="nav-title">{book.title}</div>
+          <div className="nav-right" onClick={() => navigate('/bookshelf')}>
+            书架
+          </div>
         </div>
       </div>
 
-      <div className="reader-actions">
-        <Button size="large" type="default" onClick={prev}>
-          上一章
-        </Button>
-        <Button size="large" type="primary" color="#ff6b35" onClick={next}>
-          下一章
-        </Button>
-        <Button size="large" type="default" onClick={() => setSettingsVisible(true)}>
-          设置
-        </Button>
+      <div
+        className="reader-content"
+        style={{ fontSize: typeof fontSize === 'number' ? `${fontSize}px` : fontSize }}
+        onClick={handleContentClick}
+        ref={contentRef}
+      >
+        <div className="chapter-info-header">
+          <span className="chapter-name">{chapters[current].title}</span>
+        </div>
+
+        <h2 className="chapter-title">{chapters[current].title}</h2>
+        <div className="chapter-body">
+          {chapters[current].content
+            ? chapters[current].content.split('\n').filter(Boolean).map((para, i) => (
+                <p key={i}>{para}</p>
+              ))
+            : Array.from({ length: 8 }).map((_, i) => (
+                <p key={i}>
+                  {chapters[current].title}——{i === 0 ? '本章内容正在加载中，请稍候。点击屏幕中间呼出设置菜单，点击左右两侧可以翻页。' : `这是第${i + 1}段正文内容，讲述了主角在此章节中经历的种种奇遇与成长。`}
+                </p>
+              ))
+          }
+        </div>
+
+        <div className="chapter-actions">
+          <Button plain type="primary" size="small" onClick={prev} disabled={current === 0}>上一章</Button>
+          <Button plain type="primary" size="small" onClick={next} disabled={current === chapters.length - 1}>下一章</Button>
+        </div>
       </div>
 
-      <Popup visible={visible} position="bottom" round onClose={() => setVisible(false)}>
+      {/* Footer Settings Panel */}
+      <Popup
+        visible={settingsVisible}
+        position="bottom"
+        round
+        onClose={() => setSettingsVisible(false)}
+        overlay={false}
+        className="reader-settings-popup"
+      >
+        <div className="reader-settings">
+          <div className="setting-row">
+            <span className="label">进度</span>
+            <div className="slider-container">
+              <Button size="mini" icon="arrow-left" onClick={prev} />
+              <Slider
+                value={current}
+                min={0}
+                max={chapters.length - 1}
+                onChange={goChapter}
+                buttonSize={18}
+                activeColor="#ff6b35"
+              />
+              <Button size="mini" icon="arrow" onClick={next} />
+            </div>
+          </div>
+
+          <div className="setting-row">
+            <span className="label">字号</span>
+            <div className="font-controls">
+              <Button size="small" onClick={() => useAppStore.getState().setFontSize(Math.max(12, fontSize - 2))}>A-</Button>
+              <span className="current-size">{fontSize}</span>
+              <Button size="small" onClick={() => useAppStore.getState().setFontSize(Math.min(30, fontSize + 2))}>A+</Button>
+            </div>
+          </div>
+
+          <div className="setting-row">
+            <span className="label">主题</span>
+            <div className="theme-options">
+              {Object.entries(READER_THEMES).map(([key, theme]) => (
+                <div
+                  key={key}
+                  className={`theme-circle ${readerTheme === key ? 'active' : ''}`}
+                  style={{ backgroundColor: theme.background }}
+                  onClick={() => setReaderTheme(key)}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="setting-actions">
+            <div className="action-item" onClick={() => setVisible(true)}>
+              <span style={{ fontSize: 20 }}>📖</span>
+              <span>目录</span>
+            </div>
+            <div className="action-item" onClick={() => navigate('/bookshelf')}>
+              <span style={{ fontSize: 20 }}>📚</span>
+              <span>书架</span>
+            </div>
+            <div className="action-item" onClick={() => navigate(-1)}>
+              <span style={{ fontSize: 20 }}>✕</span>
+              <span>退出阅读</span>
+            </div>
+            <div className="action-item" onClick={() => setSettingsVisible(false)}>
+              <span style={{ fontSize: 20 }}>⊙</span>
+              <span>关闭</span>
+            </div>
+          </div>
+        </div>
+      </Popup>
+
+      {/* 底部进度条 */}
+      <div
+        className={`reader-bottom-bar ${settingsVisible ? 'hidden' : ''}`}
+        style={{ backgroundColor: currentThemeStyle.background + 'ee' }}
+      >
+        <button className="bottom-prev" onClick={prev} disabled={current === 0} style={{ color: currentThemeStyle.color }}>
+          ‹
+        </button>
+        <div className="bottom-progress">
+          <div
+            className="bottom-progress-fill"
+            style={{ width: `${Math.round(((current + 1) / chapters.length) * 100)}%` }}
+          />
+        </div>
+        <span className="bottom-chapter-info" style={{ color: currentThemeStyle.color }}>
+          {current + 1}/{chapters.length}
+        </span>
+        <button className="bottom-next" onClick={next} disabled={current === chapters.length - 1} style={{ color: currentThemeStyle.color }}>
+          ›
+        </button>
+      </div>
+
+      {/* Chapter List Popup */}
+      <Popup visible={visible} position="left" style={{ width: '80%', height: '100%' }} onClose={() => setVisible(false)}>
         <div className="chapters-popup">
-          <div className="popup-title">章节列表</div>
+          <div className="popup-title">
+            <span>目录</span>
+            <span className="chapter-count">共 {chapters.length} 章</span>
+          </div>
           <div className="chapters-list">
             {chapters.map((c, idx) => (
               <Cell
                 key={c.id}
                 title={c.title}
                 clickable
+                className={current === idx ? 'active-chapter' : ''}
                 onClick={() => {
                   goChapter(idx)
                   setVisible(false)
+                  setSettingsVisible(false)
                 }}
               />
             ))}
           </div>
         </div>
       </Popup>
-
-      <ActionSheet
-        visible={settingsVisible}
-        onCancel={() => setSettingsVisible(false)}
-        title="阅读设置"
-        actions={[
-          { name: '小号字体', callback: () => useAppStore.getState().setFontSize(14) },
-          { name: '标准字体', callback: () => useAppStore.getState().setFontSize(16) },
-          { name: '大号字体', callback: () => useAppStore.getState().setFontSize(18) },
-          { name: '超大字体', callback: () => useAppStore.getState().setFontSize(20) },
-          { name: '取消' },
-        ]}
-      />
     </div>
   )
 }

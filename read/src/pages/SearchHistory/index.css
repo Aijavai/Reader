@@ -176,6 +176,58 @@
   }
 }
 
+/* 标签式搜索历史 */
+.history-tags-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 4px 0;
+}
+
+.history-tag-item {
+  display: inline-flex;
+  align-items: center;
+  background: #f5f5f5;
+  border-radius: 20px;
+  padding: 6px 12px 6px 14px;
+  gap: 8px;
+  transition: background 0.2s;
+}
+
+.history-tag-item:hover {
+  background: #ebebeb;
+}
+
+.history-tag-text {
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  user-select: none;
+}
+
+.history-tag-delete {
+  font-size: 11px;
+  color: #aaa;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 50%;
+  line-height: 1;
+  transition: color 0.2s, background 0.2s;
+}
+
+.history-tag-delete:hover {
+  color: #ff4444;
+  background: rgba(255,68,68,0.08);
+}
+
+[data-theme="dark"] .history-tag-item {
+  background: #2a2a2a;
+}
+
+[data-theme="dark"] .history-tag-text {
+  color: #ddd;
+}
+
 /* 动画效果 */
 .history-item {
   animation: fadeInUp 0.3s ease-out;

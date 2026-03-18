@@ -1,18 +1,237 @@
+const allBooks = [
+  {
+    id: 1,
+    title: '凡人修仙传',
+    author: '忘语',
+    cover: 'https://img2.doubanio.com/view/subject/s/public/s1727290.jpg',
+    category: '仙侠',
+    words: '748万字',
+    views: '1.9万次搜索',
+    status: '已完结',
+    score: '9.5',
+    tags: ['仙侠', '修仙', '慢热'],
+    description: '一个资质平平的少年，凭借坚韧的意志和努力，一步步走上了修仙之路。无数年的岁月流逝，他历经生死，终成一代大能。',
+    wordCount: '748万字',
+    updateTime: '已完结',
+    chapterCount: '第3351章',
+  },
+  {
+    id: 2,
+    title: '遮天',
+    author: '辰东',
+    cover: 'https://img1.doubanio.com/view/subject/s/public/s4554055.jpg',
+    category: '玄幻',
+    words: '636万字',
+    views: '1.7万次搜索',
+    status: '已完结',
+    score: '9.3',
+    tags: ['玄幻', '热血', '无敌'],
+    description: '叶凡自古星出发，踏上了一段波澜壮阔的修炼征程，遮天蔽日，凌驾于无数强者之上。',
+    wordCount: '636万字',
+    updateTime: '已完结',
+    chapterCount: '第3000章',
+  },
+  {
+    id: 3,
+    title: '斗破苍穹',
+    author: '天蚕土豆',
+    cover: 'https://img2.doubanio.com/view/subject/s/public/s3131470.jpg',
+    category: '玄幻',
+    words: '535万字',
+    views: '1.7万次搜索',
+    status: '已完结',
+    score: '9.1',
+    tags: ['玄幻', '炼药', '爽文'],
+    description: '这里是属于斗气的世界，没有花俏艳丽的魔法，有的，仅仅是繁衍到巅峰的斗气！少年萧炎，三年前还是名震一方的天才。',
+    wordCount: '535万字',
+    updateTime: '已完结',
+    chapterCount: '第1649章',
+  },
+  {
+    id: 4,
+    title: '全属性武道',
+    author: '莫入江湖',
+    cover: 'https://img9.doubanio.com/view/subject/s/public/s33934224.jpg',
+    category: '玄幻',
+    words: '456万字',
+    views: '1.2万次搜索',
+    status: '连载中',
+    score: '9.2',
+    tags: ['都市', '系统', '爽文'],
+    description: '星空彼岸，人类已踏出母星，征服了一片星域！王斗穿越而来，却发现自己竟然可以捡属性！别人掉落的属性，他都能捡到！',
+    wordCount: '456万字',
+    updateTime: '2小时前',
+    chapterCount: '第2156章',
+  },
+  {
+    id: 5,
+    title: '大奉打更人',
+    author: '卖报小郎君',
+    cover: 'https://img9.doubanio.com/view/subject/s/public/s33697827.jpg',
+    category: '仙侠',
+    words: '380万字',
+    views: '2.1万次搜索',
+    status: '已完结',
+    score: '9.4',
+    tags: ['仙侠', '悬疑', '推理'],
+    description: '许七安，大奉朝一名打更人，机缘巧合下卷入了一场惊天阴谋，凭借过人的智慧和勇气，逐渐揭开了这个世界的秘密。',
+    wordCount: '380万字',
+    updateTime: '已完结',
+    chapterCount: '第1500章',
+  },
+  {
+    id: 6,
+    title: '诡秘之主',
+    author: '爱潜水的乌贼',
+    cover: 'https://img2.doubanio.com/view/subject/s/public/s33896248.jpg',
+    category: '玄幻',
+    words: '446万字',
+    views: '2.5万次搜索',
+    status: '已完结',
+    score: '9.6',
+    tags: ['克苏鲁', '西幻', '悬疑'],
+    description: '克莱恩穿越到了一个充满蒸汽与魔法、神明与怪物的世界，凭借着来自"愚者"塔罗牌序列，走上了一条诡秘之路。',
+    wordCount: '446万字',
+    updateTime: '已完结',
+    chapterCount: '第1432章',
+  },
+  {
+    id: 7,
+    title: '完美世界',
+    author: '辰东',
+    cover: 'https://img1.doubanio.com/view/subject/s/public/s6956554.jpg',
+    category: '玄幻',
+    words: '658万字',
+    views: '1.6万次搜索',
+    status: '已完结',
+    score: '9.2',
+    tags: ['玄幻', '热血', '大世界观'],
+    description: '一粒尘，一滴水，一个世界。石昊自蛮荒小村走出，踏上了挑战诸天，问鼎完美的漫漫长路。',
+    wordCount: '658万字',
+    updateTime: '已完结',
+    chapterCount: '第2000章',
+  },
+  {
+    id: 8,
+    title: '剑来',
+    author: '烽火戏诸侯',
+    cover: 'https://img9.doubanio.com/view/subject/s/public/s34264140.jpg',
+    category: '仙侠',
+    words: '900万字',
+    views: '3.2万次搜索',
+    status: '连载中',
+    score: '9.7',
+    tags: ['仙侠', '成长', '哲思'],
+    description: '少年陈平安，出身寒微，自一座小镇出发，持剑走天下，以一己之力，撑起了整个家乡的命运。',
+    wordCount: '900万字',
+    updateTime: '1小时前',
+    chapterCount: '第5900章',
+  },
+  {
+    id: 9,
+    title: '雪中悍刀行',
+    author: '烽火戏诸侯',
+    cover: 'https://img2.doubanio.com/view/subject/s/public/s29564742.jpg',
+    category: '武侠',
+    words: '461万字',
+    views: '1.4万次搜索',
+    status: '已完结',
+    score: '9.3',
+    tags: ['武侠', '权谋', '江湖'],
+    description: '北凉世子徐凤年，纨绔子弟之名响彻天下，三次游历江湖，一步步蜕变成一代枭雄。',
+    wordCount: '461万字',
+    updateTime: '已完结',
+    chapterCount: '第1764章',
+  },
+  {
+    id: 10,
+    title: '神秘复苏',
+    author: '佛前献花',
+    cover: 'https://img9.doubanio.com/view/subject/s/public/s33826724.jpg',
+    category: '悬疑',
+    words: '280万字',
+    views: '1.8万次搜索',
+    status: '已完结',
+    score: '9.1',
+    tags: ['悬疑', '克苏鲁', '末世'],
+    description: '神秘复苏，怪物降临。在这个充满未知与恐惧的世界，赵勉一步步成长，揭开了神秘的真相。',
+    wordCount: '280万字',
+    updateTime: '已完结',
+    chapterCount: '第900章',
+  },
+  {
+    id: 11,
+    title: '我师兄实在太稳健了',
+    author: '言归正传',
+    cover: 'https://img2.doubanio.com/view/subject/s/public/s33950413.jpg',
+    category: '仙侠',
+    words: '310万字',
+    views: '1.5万次搜索',
+    status: '已完结',
+    score: '9.0',
+    tags: ['仙侠', '搞笑', '系统'],
+    description: '李长寿只想长生，偏偏总被师弟拉入是非中。于是他一边假装稳健，一边偷偷布局，最终成为了仙界最强的"稳健者"。',
+    wordCount: '310万字',
+    updateTime: '已完结',
+    chapterCount: '第1077章',
+  },
+  {
+    id: 12,
+    title: '一念永恒',
+    author: '耳根',
+    cover: 'https://img1.doubanio.com/view/subject/s/public/s28968210.jpg',
+    category: '仙侠',
+    words: '360万字',
+    views: '1.3万次搜索',
+    status: '已完结',
+    score: '9.0',
+    tags: ['仙侠', '修炼', '爽文'],
+    description: '一念成沧海，一念化桑田。白小纯自凡俗出发，只为守护心中那一念，踏上了永恒之路。',
+    wordCount: '360万字',
+    updateTime: '已完结',
+    chapterCount: '第1314章',
+  },
+]
+
 export default [
   {
     url: '/api/books/search',
     method: 'get',
     response: ({ query }) => {
-      const keyword = query?.q || ''
-      const data = [
-        { id: 1, title: '凡人修仙传', author: '武侠仙侠', category: '已完结', words: '748万字', views: '1.9万次搜索' },
-        { id: 2, title: '遮天', author: '武侠仙侠', category: '已完结', words: '636万字', views: '1.7万次搜索' },
-        { id: 3, title: '斗破苍穹', author: '玄幻奇幻', category: '已完结', words: '535万字', views: '1.7万次搜索' },
-        { id: 4, title: '校花的贴身高手', author: '都市', category: '连载中', words: '2517万字', views: '3.9万次搜索' },
-      ]
-      return data.filter(
-        (b) => b.title.includes(keyword) || b.author.includes(keyword)
+      const keyword = (query?.q || '').toLowerCase()
+      if (!keyword) return allBooks.slice(0, 6)
+      return allBooks.filter(
+        (b) =>
+          b.title.includes(keyword) ||
+          b.author.includes(keyword) ||
+          b.category.includes(keyword) ||
+          (b.tags || []).some((t) => t.includes(keyword))
       )
+    },
+  },
+  {
+    url: /\/api\/books\/\d+\/chapters$/,
+    method: 'get',
+    response: ({ url }) => {
+      const id = Number(url.match(/\/api\/books\/(\d+)\//)?.[1]) || 1
+      const book = allBooks.find((b) => b.id === id) || allBooks[0]
+      const chapterContents = [
+        `${book.title}的故事从这里开始。主角初出茅庐，怀揣梦想踏上旅途。世界之大，危机四伏，但这一切都挡不住他前进的脚步。`,
+        `历经第一关考验，主角初露锋芒。众人皆惊，原来这少年并非庸碌之辈，一场精彩的对决，让所有人刮目相看。`,
+        `深入险地，遭遇劲敌。危急关头，主角爆发出惊人潜力，以一敌众，杀出重围，名声渐起。`,
+        `偶得奇遇，实力大增。传说中的秘境向他敞开大门，古老的传承在此刻被他收入囊中。`,
+        `朋友与敌人，往往只在一念之间。主角在这一章结交了志同道合的伙伴，也树立了难缠的对手。`,
+        `阴谋浮出水面，背后的黑手开始显现。主角察觉到了异常，暗中调查，步步为营。`,
+        `一场大战在所难免。主角集结盟友，以寡敌众，誓死守护心中所爱，热血沸腾，荡气回肠。`,
+        `大战过后，满目疮痍。主角在废墟中重新站起，伤势虽重，意志却愈发坚定，向着更高的目标迈进。`,
+        `秘密渐渐揭开，身世之谜困扰着主角。他开始重新审视这个世界，以及自己在其中的位置。`,
+        `绝处逢生，主角领悟了新的境界。一次濒死的经历，反而让他脱胎换骨，踏入了全新的层次。`,
+      ]
+      return Array.from({ length: 30 }).map((_, i) => ({
+        id: i + 1,
+        title: `第${i + 1}章 ${['初出茅庐', '崭露头角', '危机四伏', '奇遇天降', '结交好友', '阴谋暗涌', '热血大战', '浴火重生', '身世之谜', '破茧成蝶'][i % 10]}`,
+        content: chapterContents[i % 10] + `（${book.title} · 第${i + 1}章）`,
+      }))
     },
   },
   {
@@ -20,7 +239,7 @@ export default [
     method: 'get',
     response: ({ url }) => {
       const id = Number(url.split('/').pop())
-      return {
+      return allBooks.find((b) => b.id === id) || {
         id,
         title: '全属性武道',
         author: '莫入江湖',
@@ -32,17 +251,6 @@ export default [
         updateTime: '2小时前',
         chapterCount: '第2156章',
       }
-    },
-  },
-  {
-    url: /\/api\/books\/\d+\/chapters$/,
-    method: 'get',
-    response: ({ url }) => {
-      const chapters = Array.from({ length: 20 }).map((_, i) => ({
-        id: i + 1,
-        title: `第${i + 1}章 假数据 ${i + 1}`,
-      }))
-      return chapters
     },
   },
 ]

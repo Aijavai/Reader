@@ -1,44 +1,57 @@
+// =============================================
+// LLM 工具模块 - 豆包 AI 接入
+// =============================================
 
-// const DOUBAO_SEEDREAM_API_URL = 'https://ark.cn-beijing.volces.com/api/v3/images/generations ' // 豆包文生图API的URL
+const DOUBAO_IMG_URL = '/api/doubao/images/generations'
+const IMG_MODEL = import.meta.env.VITE_DOUBAO_IMG_MODEL || 'ep-20250812115635-bj7sx'
+const API_KEY = import.meta.env.VITE_DOUBAO_API_KEY
 
+// 基础 chat 调用（AI 聊天页面使用）
+export async function chatCompletion(messages, options = {}) {
+  const DOUBAO_CHAT_URL = '/api/doubao/chat/completions'
+  const CHAT_MODEL = import.meta.env.VITE_DOUBAO_CHAT_MODEL || 'ep-20250812115635-bj7sx'
+  const response = await fetch(DOUBAO_CHAT_URL, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      model: CHAT_MODEL,
+      messages,
+      max_tokens: options.maxTokens || 800,
+      temperature: options.temperature || 0.7,
+    }),
+  })
+  if (!response.ok) throw new Error(`HTTP ${response.status}`)
+  const data = await response.json()
+  return data.choices?.[0]?.message?.content || ''
+}
+
+// AI 生成头像（文生图）
 export const generateAvatar = async (
-  prompt = '一种灰色的小猫', // 用户提供的文本提示，用于生成图像
-  api_url = '/api/doubao/images/generations', // 使用 Vite 代理路径来解决跨域
-  api_key = import.meta.env.VITE_DOUBAO_API_KEY, // 替换为你的豆包API密钥（实际由代理添加）
-  model = 'ep-20250812115635-bj7sx' // 使用特定的豆包文生图模型
+  prompt = '一只可爱的卡通猫咪头像，圆形构图，简洁风格，高清',
+  api_url = DOUBAO_IMG_URL,
+  api_key = API_KEY,
+  model = IMG_MODEL
 ) => {
   try {
     const response = await fetch(api_url, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${api_key}`, // 请替换为你自己的 API 密钥
+        'Authorization': `Bearer ${api_key}`,
         'Content-Type': 'application/json',
-        // 无需手动添加 Authorization，代理会处理
       },
-      body: JSON.stringify({
-        model: model, // 指定使用的模型
-        prompt: prompt, // 提供的文本提示
-      })
-    });
-    
-    if (!response.ok) {
-      throw new Error('网络响应错误');
-    }
-
-    const data = await response.json();
-  
-    // 假设响应中包含生成图像的URL
+      body: JSON.stringify({ model, prompt }),
+    })
+    if (!response.ok) throw new Error(`HTTP ${response.status}`)
+    const data = await response.json()
     return {
       code: 0,
-      data: {
-        imageUrl: data.data[0].url // 根据实际返回的数据结构调整
-      }
-    };
+      data: { imageUrl: data.data[0].url },
+    }
   } catch (error) {
-    console.error('生成图像时出错:', error);
-    return {
-      code: 1,
-      msg: '生成图像时发生错误...',
-    };
+    console.error('[generateAvatar]', error)
+    return { code: 1, msg: error.message || '生成图像时发生错误' }
   }
-};
+}

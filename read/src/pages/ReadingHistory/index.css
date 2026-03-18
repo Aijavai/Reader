@@ -1,11 +1,19 @@
 .reading-history-page {
-  background: var(--bg-color);
+  background: var(--bg-color, #f5f5f5);
   min-height: 100vh;
   padding-bottom: 60px;
 }
 
 .history-content {
   padding: 16px;
+}
+
+/* 统计栏 */
+.history-stats-bar {
+  font-size: 13px;
+  color: #999;
+  margin-bottom: 12px;
+  padding: 0 4px;
 }
 
 .history-list {
@@ -15,7 +23,7 @@
 }
 
 .history-item {
-  background: var(--card-bg);
+  background: var(--card-bg, #fff);
   border-radius: 12px;
   padding: 16px;
   display: flex;
@@ -35,6 +43,7 @@
   transform: translateY(0);
 }
 
+.book-cover-wrap,
 .book-cover {
   position: relative;
   flex-shrink: 0;
@@ -98,8 +107,15 @@
   color: var(--tertiary-text);
 }
 
-.action-btn {
+.action-btn,
+.action-col {
   flex-shrink: 0;
+}
+
+.progress-pct {
+  font-size: 11px;
+  color: #ff6b35;
+  font-weight: 600;
 }
 
 .empty-state {

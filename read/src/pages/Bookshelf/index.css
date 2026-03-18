@@ -1,38 +1,21 @@
 .bookshelf-page {
-  background: var(--bg-color, #f5f5f5);
   min-height: 100vh;
+  background-color: #f7f8fa;
   padding-bottom: 60px;
-  transition: background-color 0.3s ease;
 }
 
-/* 顶部导航 */
 .bookshelf-header {
-  background: #fff;
-  padding: 12px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #eee;
+  padding: 12px 16px;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 14px;
-  color: #333;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.header-left:hover {
-  opacity: 0.7;
-}
-
-.header-left:active {
-  transform: scale(0.95);
-}
-
+.header-left,
 .header-center,
 .header-right {
   display: flex;
@@ -40,312 +23,195 @@
   gap: 4px;
   font-size: 14px;
   color: #333;
-  cursor: pointer;
-}
-
-.search-text,
-.history-text,
-.more-text {
-  font-size: 12px;
 }
 
 .header-icon {
-  font-size: 16px;
-  margin-right: 2px;
+  font-size: 18px;
 }
 
-/* 阅读时长统计 */
 .reading-stats {
-  background: #fff;
-  padding: 30px 20px;
-  text-align: center;
-  position: relative;
-  margin-bottom: 8px;
+  background: linear-gradient(135deg, #ff6b35 0%, #ff9a5c 100%);
+  margin: 12px 16px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: 0 4px 16px rgba(255, 107, 53, 0.3);
+}
+
+.stats-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.stats-divider {
+  width: 1px;
+  height: 32px;
+  background: rgba(255,255,255,0.3);
 }
 
 .stats-number {
-  font-size: 48px;
-  font-weight: 300;
-  color: #333;
+  font-size: 22px;
+  font-weight: 700;
   line-height: 1;
-  margin-bottom: 8px;
 }
 
 .stats-text {
+  font-size: 11px;
+  opacity: 0.85;
+}
+
+.bookshelf-content {
+  padding: 0 16px;
+}
+
+.shelf-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 0;
   font-size: 14px;
   color: #666;
-  margin-bottom: 20px;
 }
 
-.sign-in-btn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  padding: 6px 16px;
+.shelf-count {
+  font-size: 13px;
+  color: #999;
+}
+
+.toolbar-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.sort-btn {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 4px 12px;
   font-size: 12px;
+  color: #666;
+  cursor: pointer;
 }
 
-/* 书架内容 */
-.bookshelf-content {
-  background: var(--card-bg, #fff);
-  padding: 20px;
-  min-height: calc(100vh - 200px);
+.sort-btn:active {
+  background: #f5f5f5;
+}
+
+.add-btn {
+  background: #ff6b35;
+  border: none;
+  border-radius: 16px;
+  padding: 4px 12px;
+  font-size: 12px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.add-btn:active {
+  opacity: 0.85;
+}
+
+.progress-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: rgba(255,107,53,0.9);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 8px;
+  z-index: 2;
 }
 
 .books-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  padding: 0;
+  background: transparent !important;
 }
 
-.book-card {
+.book-item {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.book-card:hover {
-  transform: translateY(-2px);
-}
-
-.book-card:active {
-  transform: scale(0.95);
-}
-
-.book-cover-container {
-  position: relative;
-  margin-bottom: 8px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid var(--border-color, transparent);
-}
-
-.book-cover {
-  display: block;
-}
-
-.book-info {
-  text-align: center;
   width: 100%;
 }
 
-.book-title {
-  font-size: 13px;
-  color: var(--text-primary, #333);
-  font-weight: 500;
-  margin-bottom: 4px;
+.book-cover {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  border-radius: 4px;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 100px;
-  line-height: 1.4;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 8px;
+}
+
+.book-checkbox {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
 }
 
 .book-progress {
-  font-size: 11px;
-  color: var(--text-tertiary, #999);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
-.progress-text {
-  background: #f0f0f0;
-  padding: 2px 6px;
-  border-radius: 10px;
+.book-info h4 {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 4px;
+}
+
+.book-info p {
+  margin: 0;
+  font-size: 12px;
+  color: #999;
+}
+
+.update-time {
   font-size: 10px;
-}
-
-/* 添加书籍卡片 */
-.add-book-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 120px;
-  height: 160px;
-  border: 2px dashed #ddd;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: border-color 0.3s;
-}
-
-.add-book-card:hover {
-  border-color: #ff6b35;
-}
-
-.add-book-icon {
-  margin-bottom: 8px;
-}
-
-.plus-icon {
-  font-size: 40px;
   color: #ccc;
-  font-weight: 300;
 }
 
-/* 空书架状态 */
-.empty-bookshelf {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
+.empty-shelf {
+  padding-top: 40px;
   text-align: center;
 }
 
-.empty-icon {
-  margin-bottom: 20px;
-  opacity: 0.5;
+.bottom-button {
+  width: 160px;
+  margin-top: 20px;
 }
 
-.bookmark-icon {
-  font-size: 60px;
+.edit-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  z-index: 100;
 }
 
-.empty-text {
-  font-size: 16px;
-  color: #333;
-  font-weight: 500;
-  margin-bottom: 8px;
-}
-
-.empty-desc {
+.select-info {
   font-size: 14px;
-  color: #999;
-  margin-bottom: 30px;
-}
-
-.go-bookstore-btn {
-  width: 200px;
-}
-
-/* 暗色主题适配 */
-[data-theme="dark"] .bookshelf-page {
-  background: var(--bg-color);
-}
-
-[data-theme="dark"] .bookshelf-content {
-  background: var(--card-bg);
-}
-
-[data-theme="dark"] .book-cover-container {
-  border-color: var(--border-color);
-}
-
-[data-theme="dark"] .book-card:hover .book-cover-container {
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
-}
-
-/* 响应式设计 */
-@media (max-width: 375px) {
-  .books-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-  
-  .book-card {
-    margin: 0 auto;
-  }
-  
-  .book-cover-container {
-    width: 100px;
-  }
-  
-  .book-title {
-    max-width: 80px;
-    font-size: 12px;
-  }
-  
-  .add-book-card {
-    width: 100px;
-    height: 133px;
-  }
-}
-
-/* 增强移动端适配 */
-@media (max-width: 768px) {
-  .bookshelf-page {
-    padding-bottom: 80px;
-  }
-  
-  .bookshelf-header {
-    padding: 16px;
-  }
-  
-  .header-title {
-    font-size: 18px;
-  }
-  
-  .bookshelf-content {
-    padding: 0 16px 16px;
-  }
-  
-  .books-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
-  
-  .book-item {
-    width: 100%;
-  }
-  
-  .book-cover-container {
-    width: 100%;
-    aspect-ratio: 3/4;
-  }
-  
-  .add-book-card {
-    width: 100%;
-    aspect-ratio: 3/4;
-    height: auto;
-  }
-}
-
-@media (max-width: 480px) {
-  .bookshelf-header {
-    padding: 12px;
-  }
-  
-  .header-title {
-    font-size: 16px;
-  }
-  
-  .bookshelf-content {
-    padding: 0 12px 12px;
-  }
-  
-  .books-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-  
-  .book-title {
-    font-size: 11px;
-    max-width: none;
-  }
-  
-  .book-meta {
-    font-size: 10px;
-  }
-  
-  .progress-text {
-    font-size: 9px;
-    padding: 1px 4px;
-  }
-  
-  .plus-icon {
-    font-size: 32px;
-  }
-  
-  .empty-bookshelf {
-    padding: 40px 16px;
-  }
-}
-
-@media (min-width: 414px) and (max-width: 768px) {
-  .books-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  color: #333;
 }

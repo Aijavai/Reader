@@ -2,7 +2,6 @@ import React, { useState, useMemo } from 'react';
 import { Button, Image, Progress, Grid, ActionSheet, Toast, Empty, Checkbox, Dialog } from 'react-vant';
 import { useNavigate } from 'react-router-dom';
 import { useAppStore } from '../../store/useAppStore';
-import { placeholder } from '@/utils';
 import './index.css';
 
 const COVER = (id, w = 100, h = 130) =>

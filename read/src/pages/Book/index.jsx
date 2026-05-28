@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavBar, Button, Tag, Image, Toast } from 'react-vant';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppStore } from '@/store/useAppStore';

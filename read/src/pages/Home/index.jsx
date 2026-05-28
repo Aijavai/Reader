@@ -8,10 +8,8 @@ import {
 } from 'react-vant';
 import { useNavigate } from 'react-router-dom';
 import SearchBox from '@/components/SearchBox';
-import { placeholder } from '@/utils';
 import './index.css';
 import { getHomeData } from '@/api/books';
-import { useAppStore } from '@/store/useAppStore';
 import { getCover } from '@/utils/covers';
 
 const COVER = (id) => getCover(id)

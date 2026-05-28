@@ -182,7 +182,7 @@ const Profile = () => {
         } else {
           Toast.fail('生成失败：' + (result.msg || '未知错误'));
         }
-      } catch (error) {
+      } catch {
         Toast.fail('头像生成失败，请检查网络或 API Key');
       } finally {
         setLoading(false);

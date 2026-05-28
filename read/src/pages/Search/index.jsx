@@ -75,7 +75,7 @@ const SearchPage = () => {
       debouncedSearch(q);
       setActiveTab(q);
     }
-  }, [params]);
+  }, [params, addSearchHistory, debouncedSearch]);
 
   const handleSearch = (value) => {
     if (value.trim()) {
@@ -89,7 +89,7 @@ const SearchPage = () => {
       setShowResults(false);
       setSearchResults([]);
     }
-  }, [searchValue]);
+  }, [searchValue, setSearchResults]);
 
   const handleTagClick = (tag) => {
     setSearchValue(tag);

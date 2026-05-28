@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect, useState, useMemo } from 'react'
 import { Button, Popup, Cell, Toast, Slider } from 'react-vant'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAppStore } from '@/store/useAppStore'
@@ -28,13 +28,14 @@ export default function Reader() {
     theme: appTheme,
   } = useAppStore()
 
-  const book =
+  const book = useMemo(() => (
     bookshelfBooks.find((b) => String(b.id) === String(id)) || {
       id: Number(id) || 1,
       title: '全属性武道',
       author: '莫入江湖',
       cover: placeholder(120, 160),
     }
+  ), [bookshelfBooks, id])
 
   const [visible, setVisible] = useState(false)
   const [settingsVisible, setSettingsVisible] = useState(false)
@@ -50,7 +51,7 @@ export default function Reader() {
     })
     // Initialize theme based on app theme or default
     if (appTheme === 'dark') setReaderTheme('night')
-  }, [])
+  }, [addReadingHistory, appTheme, book.id, book.title, book.author, book.cover])
 
   useEffect(() => {
     if (contentRef.current) {
